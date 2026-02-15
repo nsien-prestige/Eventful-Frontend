@@ -1,0 +1,115 @@
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 3rem;
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--nav-border);
+    backdrop-filter: blur(16px);
+    transition: all 0.4s ease;
+}
+
+
+.logo {
+    font-weight: 800;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.nav-center {
+    display: flex;
+    gap: 0.4rem;
+    background: #f1f2f6;
+    padding: 0.4rem;
+    border-radius: 999px;
+}
+
+.nav-pill {
+    border: none;
+    background: transparent;
+    padding: 0.6rem 1.5rem;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.nav-pill:hover {
+    background: rgba(0,0,0,0.05);
+    transform: translateY(-2px);
+}
+
+.nav-pill.active {
+    background: var(--pill-active-bg);
+    color: var(--pill-active-color);
+}
+
+.nav-right {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+}
+
+.nav-link {
+    position: relative;
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background: #111;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.login-btn {
+    border: none;
+    background: var(--accent);
+    color: white;
+    padding: 0.6rem 1.6rem;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.login-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* BUY THEME (light) */
+body[data-theme="buy"] {
+    --nav-bg: rgba(255,255,255,0.85);
+    --nav-border: #eee;
+    --pill-active-bg: #111;
+    --pill-active-color: white;
+    --accent: #111;
+}
+
+/* CREATE THEME (darker / premium) */
+body[data-theme="create"] {
+    --nav-bg: linear-gradient(90deg, #111 0%, #1e1e2f 100%);
+    --nav-border: rgba(255,255,255,0.08);
+    --pill-active-bg: linear-gradient(90deg, #ff416c, #ff4b2b);
+    --pill-active-color: white;
+    --accent: #ff416c;
+
+    background: radial-gradient(circle at top left, #1a1a2e, #0f0f1a 60%);
+    color: white;
+}
+
+

@@ -1,0 +1,36 @@
+.notify {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    width: 300px;
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    font-weight: 600;
+    color: white;
+    z-index: 9999;
+    animation: slideIn 0.4s ease forwards;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    text-align: left;
+}
+
+.notify.success {
+    background: linear-gradient(90deg, #16a34a, #22c55e);
+}
+
+.notify.error {
+    background: linear-gradient(90deg, #dc2626, #ef4444);
+}
+
+.notify.hide {
+    animation: slideOut 0.4s ease forwards;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-150%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(-150%); opacity: 0; }
+}
