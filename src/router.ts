@@ -3,10 +3,11 @@ import { renderLogin } from "./pages/login/login";
 import { renderSignup } from "./pages/signup/signup";
 import { renderNavbar } from "./components/navbar/navbar";
 import { renderExplore } from "./pages/explore/explore";
-import { renderCreate } from "./pages/create/create";
+import { renderCreateLanding } from "./pages/create/createLanding";
 import { isLoggedIn } from "./utils/auth";
 import { renderMyEvents } from "./pages/my-events/my-events";
 import { renderEventDetails } from "./pages/event-details/event-details";
+import { renderCreateEventPage } from "./pages/create/createEventPage";
 
 
 const routes: Record<string, () => void> = {
@@ -14,8 +15,9 @@ const routes: Record<string, () => void> = {
     "/login": renderLogin,
     "/signup": renderSignup,
     "/explore": renderExplore,
-    "/create": renderCreate,
+    "/create": renderCreateLanding,
     "/my-events": renderMyEvents,
+    "/create/new": renderCreateEventPage
 
 };
 

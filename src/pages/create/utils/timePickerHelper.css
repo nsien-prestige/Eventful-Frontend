@@ -1,0 +1,179 @@
+/* ===============================================
+   EVENTBRITE-STYLE TIME PICKER - COMPLETE FIX
+   =============================================== */
+
+/* WRAPPER - Critical for positioning */
+.time-picker-wrapper {
+    position: relative;
+    display: inline-block;
+    width: auto;
+}
+
+/* Button - Small rectangular Eventbrite style */
+.time-picker-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    background: #fff;
+    font-size: 14px;
+    font-weight: 400;
+    color: #6b7280;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s ease;
+    position: relative;
+    min-width: 150px;
+    white-space: nowrap;
+}
+
+.time-picker-btn:hover {
+    border-color: #9ca3af;
+}
+
+.time-picker-btn.active {
+    outline: none;
+    border-color: #3659e3;
+    box-shadow: 0 0 0 3px rgba(54, 89, 227, 0.08);
+}
+
+.time-picker-btn svg {
+    flex-shrink: 0;
+    color: #9ca3af;
+    width: 16px;
+    height: 16px;
+}
+
+.time-picker-btn.has-value {
+    border-color: #3659e3;
+    font-weight: 500;
+    color: #1f2937;
+}
+
+.time-picker-btn.has-value svg {
+    color: #3659e3;
+}
+
+.time-picker-label {
+    flex: 1;
+    text-align: left;
+    color: #9ca3af;
+    font-size: 14px;
+}
+
+.time-picker-btn.has-value .time-picker-label {
+    color: #1f2937;
+}
+
+/* Dropdown - Positioned directly below button */
+.time-picker-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    background: #fff;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: all 0.15s ease;
+    width: 160px;
+    max-height: 0;
+    overflow: hidden;
+}
+
+.time-picker-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    max-height: 260px;
+}
+
+.time-picker-list {
+    max-height: 260px;
+    overflow-y: auto;
+    padding: 4px;
+}
+
+/* Custom scrollbar */
+.time-picker-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.time-picker-list::-webkit-scrollbar-track {
+    background: #f9fafb;
+    border-radius: 3px;
+}
+
+.time-picker-list::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 3px;
+}
+
+.time-picker-list::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+/* Time options - compact like Eventbrite */
+.time-picker-option {
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #374151;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.1s ease;
+    user-select: none;
+}
+
+.time-picker-option:hover {
+    background: #f3f4f6;
+    color: #1f2937;
+}
+
+.time-picker-option.selected {
+    background: #3659e3;
+    color: #fff;
+    font-weight: 500;
+}
+
+.time-picker-option.selected:hover {
+    background: #2948c7;
+}
+
+/* Overlay - covers screen to detect outside clicks */
+.time-picker-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: transparent;
+    display: none;
+}
+
+.time-picker-overlay.active {
+    display: block;
+}
+
+/* Hidden input */
+.time-picker-input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+    left: -9999px;
+}
+
+/* Date/time grid layout */
+.date-time-grid {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 12px;
+    align-items: start;
+}

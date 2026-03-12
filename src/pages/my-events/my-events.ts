@@ -2,7 +2,10 @@ import { getMyEvents } from "../../api/my-events.api";
 import { getToken } from "../../utils/auth";
 import { navigate } from "../../router";
 import { getEventAnalytics } from "../../api/analytics.api";
+import { deleteEvent } from "../../api/deleteEvent.api";
 import './my-events.css'
+import { showMessage } from "../../components/notify/notify";
+import { showDeleteModal } from "../../components/confirm-delete/confirmDelete";
 
 export async function renderMyEvents() {
     const app = document.getElementById("app")!;
@@ -121,6 +124,26 @@ export async function renderMyEvents() {
             preview.addEventListener("click", () => {
                 const card = preview.closest(".event-card");
                 card?.classList.toggle("active");
+            })
+        });
+
+        document.querySelectorAll(".delete-btn").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                e.stopPropagation();
+
+                const id = (btn as HTMLElement).dataset.id!;
+                const card = btn.closest(".event-card") as HTMLElement;
+                const title = card.querySelector("h3")?.textContent || "";
+
+                showDeleteModal(title, async () => {
+                    try {
+                        await deleteEvent(token, id);
+                        card.remove();
+                        showMessage("Event deleted successfully", "success");
+                    } catch {
+                        showMessage("Failed to delete event", "error");
+                    }
+                });
             });
         });
 

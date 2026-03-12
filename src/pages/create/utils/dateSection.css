@@ -1,0 +1,261 @@
+/* ===============================================
+   DATE & LOCATION SECTION - EVENTBRITE STYLE
+   =============================================== */
+
+/* Section body (when active/open) */
+.section-body {
+    margin-top: 32px;
+}
+
+/* Field groups - proper spacing */
+.field-group {
+    margin-bottom: 32px;
+}
+
+.field-group:last-child {
+    margin-bottom: 0;
+}
+
+.field-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #39364f;
+    margin-bottom: 20px;
+}
+
+/* Location pills container */
+.loc-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.loc-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: 1.5px solid #d1d5db;
+    border-radius: 4px;
+    background: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    color: #39364f;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.loc-pill svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.loc-pill:hover {
+    border-color: #3659e3;
+    background: #f0f3ff;
+}
+
+/* ACTIVE STATE - BLUE (like Eventbrite) */
+.loc-pill.active {
+    border-color: #3659e3;
+    background: #3659e3;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(54, 89, 227, 0.2);
+}
+
+.loc-pill.active svg {
+    color: #fff;
+}
+
+/* Date and time grid - Event Date | Start Time | End Time */
+.date-time-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+    align-items: start;
+}
+
+/* Floating field (Event Date) */
+.floating-field {
+    position: relative;
+    margin-bottom: 0;
+}
+
+.floating-field input {
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: 4px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+    background: #fff;
+    transition: all 0.15s ease;
+}
+
+.floating-field input:focus {
+    outline: none;
+    border-color: #3659e3;
+    box-shadow: 0 0 0 3px rgba(54, 89, 227, 0.08);
+}
+
+.floating-field label {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    padding: 0 4px;
+    font-size: 14px;
+    color: #9ca3af;
+    transition: all 0.2s ease;
+    pointer-events: none;
+}
+
+.floating-field input:focus + label,
+.floating-field input:not(:placeholder-shown) + label,
+.floating-field.has-value label {
+    top: 0;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #3659e3;
+    font-weight: 600;
+}
+
+/* Location search wrapper */
+.location-search-wrapper {
+    position: relative;
+}
+
+.location-search-wrapper input {
+    width: 100%;
+    padding: 11px 14px 11px 40px;
+    border-radius: 4px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+    background: #fff;
+    transition: all 0.15s ease;
+}
+
+.location-search-wrapper input:focus {
+    outline: none;
+    border-color: #3659e3;
+    box-shadow: 0 0 0 3px rgba(54, 89, 227, 0.08);
+}
+
+.location-search-wrapper .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    pointer-events: none;
+}
+
+/* Field hints */
+.field-hint {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 6px;
+    line-height: 1.5;
+}
+
+/* TBD notice */
+.tbd-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 16px;
+    background: #f9fafb;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.tbd-notice svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: #9ca3af;
+}
+
+/* ===============================================
+   DATE PREVIEW HEADER (Collapsed State)
+   =============================================== */
+
+/**
+ * NOTE: The .date-preview-header element uses the .hidden class.
+ * It starts hidden via class="hidden" in the HTML.
+ * updateDatePreview() removes .hidden to show it — at that point
+ * the flex layout below kicks in via the :not(.hidden) selector.
+ */
+.date-preview-header:not(.hidden) {
+    display: flex;
+    align-items: flex-start;
+    flex: 1;
+    min-width: 0;
+}
+
+.date-preview-col {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Vertical divider between the two columns */
+.date-preview-divider {
+    width: 1px;
+    background: #d8d6e0;
+    align-self: stretch;
+    margin: 0 32px;
+    flex-shrink: 0;
+}
+
+/* "Date and time" / "Location" headings */
+.date-preview-col-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1e0a3c;
+    margin: 0 0 8px 0;
+    line-height: 1.25;
+}
+
+/* Icon + value text below the heading */
+.date-preview-value {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #39364f;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.date-preview-value svg {
+    flex-shrink: 0;
+    color: #3659e3;
+    width: 18px;
+    height: 18px;
+}
+
+/* ===============================================
+   RESPONSIVE
+   =============================================== */
+
+@media (max-width: 768px) {
+    .date-time-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .date-preview-header:not(.hidden) {
+        flex-direction: column;
+        gap: 24px;
+    }
+    
+    .date-preview-divider {
+        width: 100%;
+        height: 1px;
+        margin: 0;
+    }
+}

@@ -1,0 +1,363 @@
+/* ===============================================
+   PRICING SECTION STYLES
+   =============================================== */
+
+.pricing-section {
+    margin-bottom: 24px;
+}
+
+.pricing-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e0a3c;
+    margin: 0;
+}
+
+/* ── Ticket list ── */
+.ticket-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+/* ── Individual ticket card ── */
+.ticket-card {
+    padding: 20px;
+    border: 1.5px solid #e5e5e5;
+    border-radius: 10px;
+    background: #fafafa;
+    transition: border-color 0.2s ease;
+}
+
+.ticket-card:hover {
+    border-color: #d0d0d0;
+}
+
+/* ── Title field ── */
+.ticket-title-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.ticket-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.ticket-name-field {
+    flex: 1;
+    position: relative;
+}
+
+.ticket-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #3a3247;
+    margin-bottom: 8px;
+}
+
+.ticket-name-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #d8d6e0;
+    border-radius: 6px;
+    font-size: 0.9375rem;
+    font-family: inherit;
+    color: #1e0a3c;
+    background: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ticket-name-input:focus {
+    outline: none;
+    border-color: #3659e3;
+    box-shadow: 0 0 0 3px rgba(54, 89, 227, 0.1);
+}
+
+/* Trash button */
+.ticket-trash {
+    background: none;
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #9ca3af;
+    transition: color 0.2s ease, background 0.2s ease;
+    margin-top: 4px;
+}
+
+.ticket-trash:hover {
+    color: #d63636;
+    background: #fff1f0;
+}
+
+/* ── Free/Priced Toggle ── */
+.ticket-type-toggle {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.ticket-type-btn {
+    flex: 1;
+    padding: 10px 16px;
+    border: 1.5px solid #d8d6e0;
+    border-radius: 6px;
+    background: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #6b7280;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.ticket-type-btn:hover {
+    border-color: #3659e3;
+    background: #f3f4ff;
+}
+
+.ticket-type-btn.active {
+    border-color: #3659e3;
+    background: #3659e3;
+    color: #fff;
+}
+
+/* ── Price and Quantity row ── */
+.ticket-input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.ticket-field {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Price input with currency symbol */
+.ticket-price-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.ticket-currency {
+    position: absolute;
+    left: 14px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #6b7280;
+    pointer-events: none;
+}
+
+.ticket-price-input,
+.ticket-quantity-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #d8d6e0;
+    border-radius: 6px;
+    font-size: 0.9375rem;
+    font-family: inherit;
+    color: #1e0a3c;
+    background: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ticket-price-input {
+    padding-left: 28px; /* Space for $ symbol */
+}
+
+.ticket-price-input:focus,
+.ticket-quantity-input:focus {
+    outline: none;
+    border-color: #3659e3;
+    box-shadow: 0 0 0 3px rgba(54, 89, 227, 0.1);
+}
+
+/* ── + Add ticket button ── */
+.pricing-add-ticket-btn {
+    width: 100%;
+    margin-top: 8px;
+    padding: 16px;
+    border-radius: 8px;
+    background: #f3f4f6;
+    border: none;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #3659e3;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s ease;
+}
+
+.pricing-add-ticket-btn:hover {
+    background: #e9eaec;
+}
+
+/* ===============================================
+   TICKET PREVIEW (Collapsed State)
+   =============================================== */
+
+/* Collapsed ticket card */
+.ticket-card.collapsed {
+    padding: 0;
+    border-color: #e1e4e8;
+    transition: all 0.2s ease;
+    overflow: hidden;
+}
+
+.ticket-card.collapsed:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Preview layout */
+.ticket-preview {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 16px 16px 28px;
+}
+
+/* Colored accent bar */
+.ticket-preview-accent {
+    position: absolute;
+    left: 12px;
+    top: 16px;
+    bottom: 16px;
+    width: 1.7px;
+    border-radius: 2px;
+}
+
+/* Main content */
+.ticket-preview-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Ticket name */
+.ticket-preview-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #24292f;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Details row (price + quantity) */
+.ticket-preview-details {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.ticket-preview-price {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #3659e3;
+}
+
+.ticket-preview-qty {
+    font-size: 0.8125rem;
+    color: #6b7280;
+}
+
+/* Edit button */
+.ticket-edit-btn {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    color: #3659e3;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.ticket-edit-btn:hover {
+    background: rgba(54, 89, 227, 0.1);
+    transform: scale(1.05);
+}
+
+.ticket-edit-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* ===============================================
+   PRICING PREVIEW SLOTS CONTAINER (Collapsed State)
+   =============================================== */
+
+.pricing-preview-slots-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+    padding: 0;
+}
+
+/* Individual preview ticket */
+.pricing-preview-ticket {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 16px 16px 28px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Colored bar */
+.pricing-preview-ticket .ticket-preview-accent {
+    position: absolute;
+    left: 12px;
+    top: 16px;
+    bottom: 16px;
+    width: 1.7px;
+    border-radius: 2px;
+}
+
+/* Content */
+.pricing-preview-ticket-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.pricing-preview-ticket-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #24292f;
+    margin: 0;
+}
+
+.pricing-preview-ticket-details {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pricing-preview-ticket-price {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #3659e3;
+}
+
+.pricing-preview-ticket-qty {
+    font-size: 0.8125rem;
+    color: #6b7280;
+}

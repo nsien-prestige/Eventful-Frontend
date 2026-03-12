@@ -134,7 +134,7 @@ function renderFeatured(events: any[]) {
     }
 
     // 🔥 Duplicate for seamless loop
-    const looped = [...events, ...events];
+    const looped = events;
 
     container.innerHTML = looped.map(event => `
         <div class="featured-card"

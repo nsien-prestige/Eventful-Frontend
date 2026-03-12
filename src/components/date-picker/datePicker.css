@@ -1,0 +1,139 @@
+/* ===== PREMIUM SAAS DATE PICKER ===== */
+
+.flatpickr-calendar {
+    border-radius: 22px;
+    border: none;
+    box-shadow: 
+        0 25px 70px rgba(20, 10, 40, 0.15),
+        0 5px 20px rgba(20, 10, 40, 0.08);
+    padding: 18px;
+    font-family: inherit;
+    backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+/* ================= HEADER ================= */
+
+.flatpickr-months {
+    margin-bottom: 10px;
+}
+
+.flatpickr-current-month {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 17px;
+    color: #1e1f2e;
+    letter-spacing: -0.2px;
+}
+
+/* Month dropdown */
+.flatpickr-current-month .flatpickr-monthDropdown-months {
+    font-weight: 600;
+    font-size: 17px;
+    border: none;
+    background: transparent;
+    color: #1e1f2e;
+    cursor: pointer;
+}
+
+/* Year input */
+.flatpickr-current-month input.cur-year {
+    font-weight: 600;
+    font-size: 17px;
+    border: none;
+    background: transparent;
+    color: #1e1f2e;
+}
+
+/* Navigation arrows */
+
+.flatpickr-prev-month,
+.flatpickr-next-month {
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    padding: 6px;
+}
+
+.flatpickr-prev-month:hover,
+.flatpickr-next-month:hover {
+    background: #eef1ff;
+    transform: scale(1.1);
+}
+
+/* ================= WEEKDAYS ================= */
+
+.flatpickr-weekday {
+    color: #7a7f95;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+/* ================= DAYS ================= */
+
+.flatpickr-day {
+    border-radius: 14px;
+    transition: all 0.18s ease;
+    font-weight: 500;
+}
+
+.flatpickr-day:hover {
+    background: #eef1ff;
+    transform: scale(1.08);
+}
+
+.flatpickr-day.today {
+    border: 1px solid #3659e3;
+}
+
+.flatpickr-day.selected {
+    background: linear-gradient(135deg, #3659e3, #4f7cff);
+    border: none;
+    box-shadow: 0 10px 25px rgba(54, 89, 227, 0.35);
+    color: white;
+}
+
+/* Disabled days */
+.flatpickr-day.flatpickr-disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* ================= TIME PICKER ================= */
+
+.flatpickr-time {
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+}
+
+.flatpickr-time input {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+/* ================= ALT INPUT FIELD ================= */
+
+.flatpickr-input {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 16px;
+    border: 1px solid #d8d6e0;
+    transition: 0.2s ease;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.flatpickr-input:focus {
+    border-color: #3659e3;
+    box-shadow: 0 0 0 3px rgba(54, 89, 227, 0.15);
+}
+
+.floating-field.has-value label {
+    top: 0;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #3659e3;
+    font-weight: 600;
+}

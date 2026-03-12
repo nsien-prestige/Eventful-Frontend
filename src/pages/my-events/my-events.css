@@ -94,6 +94,9 @@
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+    padding: 20px;
+    border-radius: 12px;
 }
 
 .analytics-grid div {
@@ -120,6 +123,22 @@
     cursor: pointer;
 }
 
+.more-btn {
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #64748b;
+}
+
+.danger-zone {
+    display: none;
+}
+
+.event-actions.show-danger .danger-zone {
+    display: block;
+}
+
 .delete-btn {
     background: #ef4444;
     color: white;
@@ -127,6 +146,12 @@
     border-radius: 8px;
     border: none;
     cursor: pointer;
-} 
+    transition: 0.2s ease;
+}
+
+.delete-btn:hover {
+    background: #dc2626;
+}
+
 
 

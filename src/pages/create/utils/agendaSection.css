@@ -1,0 +1,494 @@
+/* ===============================================
+   AGENDA SECTION STYLES
+   =============================================== */
+
+.agenda-section {
+    margin-bottom: 24px;
+}
+
+.agenda-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.agenda-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e0a3c;
+    margin: 0;
+}
+
+.agenda-delete-btn {
+    background: none;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    color: #D63636;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: opacity 0.2s ease;
+}
+
+.agenda-delete-btn:hover {
+    opacity: 0.7;
+}
+
+.agenda-description {
+    font-size: 0.9375rem;
+    color: #585163;
+    line-height: 1.6;
+    margin: 0 0 40px 0;
+}
+
+/* ── Slot list ── */
+.agenda-slot-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+/* ── Individual slot card ── */
+.agenda-slot-card {
+    padding: 20px;
+    border: 1.5px solid #e5e5e5;
+    border-radius: 10px;
+    background: #fafafa;
+    transition: border-color 0.2s ease;
+}
+
+.agenda-slot-card:hover {
+    border-color: #d0d0d0;
+}
+
+/* ── Title field ── */
+.agenda-title-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.agenda-slot-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.agenda-slot-title-field {
+    flex: 1;
+    position: relative;
+}
+
+.agenda-slot-title-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #3a3247;
+    margin-bottom: 8px;
+}
+
+.agenda-required {
+    color: #d63636;
+}
+
+.agenda-slot-title-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #d8d6e0;
+    border-radius: 6px;
+    font-size: 0.9375rem;
+    font-family: inherit;
+    color: #1e0a3c;
+    background: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.agenda-slot-title-input:focus {
+    outline: none;
+    border-color: #3659e3;
+    box-shadow: 0 0 0 3px rgba(54, 89, 227, 0.1);
+}
+
+.agenda-slot-title-input.has-error {
+    border-color: #d63636;
+}
+
+.agenda-slot-error {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.8125rem;
+    color: #d63636;
+    font-weight: 500;
+}
+
+.agenda-slot-error.hidden {
+    display: none;
+}
+
+/* Trash button */
+.agenda-slot-trash {
+    background: none;
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #9ca3af;
+    transition: color 0.2s ease, background 0.2s ease;
+    margin-top: 4px;
+}
+
+.agenda-slot-trash:hover {
+    color: #d63636;
+    background: #fff1f0;
+}
+
+/* ── Time row ── */
+.agenda-time-row {
+    display: flex;
+    gap: 12px;
+}
+
+/* ===============================================
+   TIME PICKER STYLES MOVED TO timePickerHelper.css
+   =============================================== 
+   
+   The following styles have been removed and are now in:
+   frontend/src/pages/create/utils/timePickerHelper.css
+   
+   - .agenda-time-btn
+   - .agenda-time-btn svg
+   - .agenda-time-btn:hover
+   - .agenda-time-btn:focus-within
+   - .agenda-time-btn.has-value
+   - .agenda-time-btn.has-value svg
+   - .agenda-time-input
+   
+   =============================================== */
+
+/* ── Inline action buttons (Host, Description) ── */
+.agenda-inline-actions {
+    display: flex;
+    gap: 4px;
+}
+
+.agenda-inline-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border: none;
+    background: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #585163;
+    cursor: pointer;
+    border-radius: 6px;
+    font-family: inherit;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.agenda-inline-btn:hover {
+    background: #f3f4f6;
+    color: #1e0a3c;
+}
+
+/* ── Collapsible fields (host input, desc textarea) ── */
+.agenda-collapsible-field {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #d8d6e0;
+    border-radius: 6px;
+    font-size: 0.9375rem;
+    font-family: inherit;
+    color: #1e0a3c;
+    background: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.agenda-collapsible-field:focus {
+    outline: none;
+    border-color: #3659e3;
+    box-shadow: 0 0 0 3px rgba(54, 89, 227, 0.1);
+}
+
+.agenda-collapsible-field.hidden {
+    display: none !important;
+}
+
+/* ── + Add slot button ── */
+.agenda-add-slot-btn {
+    width: 100%;
+    margin-top: 8px;
+    padding: 16px;
+    border-radius: 8px;
+    background: #f3f4f6;
+    border: none;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #3659e3;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s ease;
+}
+
+.agenda-add-slot-btn:hover {
+    background: #e9eaec;
+}
+
+/* ── Description field header (label + X) ── */
+.agenda-desc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.agenda-desc-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #6f7287;
+}
+
+.agenda-desc-remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px;
+    border-radius: 3px;
+    color: #9ca3af;
+    display: flex;
+    align-items: center;
+    transition: color 0.15s ease, background 0.15s ease;
+}
+
+.agenda-desc-remove:hover {
+    color: #d63636;
+    background: #fff1f0;
+}
+
+/* ===============================================
+   AGENDA SLOT PREVIEW (Collapsed State) - EVENTBRITE STYLE
+   =============================================== */
+
+/* Collapsed slot card */
+.agenda-slot-card.collapsed {
+    padding: 0;
+    border-color: #e1e4e8;
+    transition: all 0.2s ease;
+    overflow: hidden;
+    /* Background color is set inline via JS */
+}
+
+.agenda-slot-card.collapsed:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Preview layout */
+.agenda-slot-preview {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 20px 20px 32px; /* Extra left padding for inset bar */
+}
+
+/* Colored accent bar - INSET, not at edge */
+.agenda-preview-accent {
+    position: absolute;
+    left: 16px; /* INSET - not at edge! */
+    top: 20px;
+    bottom: 20px;
+    width: 1.7px; /* SUPER THIN */
+    border-radius: 2px;
+}
+
+/* Main content area */
+.agenda-slot-preview-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Time display */
+.agenda-slot-preview-time {
+    font-size: 13px;
+    font-weight: 600;
+    color: #57606a;
+    letter-spacing: 0.2px;
+    margin: 0;
+}
+
+/* Title display */
+.agenda-slot-preview-title {
+    font-size: 1.125rem;
+    letter-spacing: .25px;
+    font-weight: 600;
+    color: #24292f;
+    line-height: 1.5rem;
+    margin: 0;
+}
+
+/* Host badge (small tag) */
+.agenda-slot-preview-host-badge {
+    display: inline-block;
+    padding: 0.625rem 0.5rem;
+    background: #ffffff;
+    border-radius: 0.5rem;
+    font-size: 14px;
+    font-weight: 500;
+    color: #57606a;
+    margin-top: 4px;
+    width: fit-content;
+}
+
+/* Description text in preview (separate section below) */
+.agenda-slot-preview-desc {
+    font-size: 14px;
+    color: #656d76;
+    margin: 0;
+    line-height: 1.5;
+    padding-top: 4px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Edit button */
+.agenda-slot-edit-btn {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    color: #3659e3;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    margin-top: 2px;
+}
+
+.agenda-slot-edit-btn:hover {
+    background: rgba(54, 89, 227, 0.1);
+    transform: scale(1.05);
+}
+
+.agenda-slot-edit-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* ===============================================
+   AGENDA PREVIEW HEADER (Collapsed State)
+   Add this to agendaSection.css
+   =============================================== */
+
+/* Preview header container (holds all preview slots) */
+.agenda-preview-header {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* Container for all preview slots (inserted after header) */
+.agenda-preview-slots-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+    padding: 0;
+}
+
+/* Individual preview slot (stacked vertically) */
+.agenda-preview-slot {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 16px 16px 28px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    /* Background color set inline via JS */
+}
+
+/* Colored bar in preview slot */
+.agenda-preview-slot .agenda-preview-accent {
+    position: absolute;
+    left: 12px;
+    top: 16px;
+    bottom: 16px;
+    width: 1.7px;
+    border-radius: 2px;
+    /* Color set inline via JS */
+}
+
+/* Content area of preview slot */
+.agenda-preview-slot-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Time in preview */
+.agenda-preview-slot-time {
+    font-size: 13px;
+    font-weight: 600;
+    color: #57606a;
+    letter-spacing: 0.2px;
+    margin: 0;
+}
+
+/* Title in preview */
+.agenda-preview-slot-title {
+    font-size: 1.125rem;
+    letter-spacing: .25px;
+    font-weight: 600;
+    color: #24292f;
+    line-height: 1.5rem;
+    margin: 0;
+}
+
+/* Host badge in preview */
+.agenda-preview-slot-host {
+    display: inline-block;
+    padding: 0.625rem 0.5rem;
+    background: #ffffff;
+    border-radius: 0.5rem;
+    font-size: 14px;
+    font-weight: 500;
+    color: #57606a;
+    margin-top: 4px;
+    width: fit-content;
+}
+
+/* Description in preview */
+.agenda-preview-slot-desc {
+    font-size: 14px;
+    color: #656d76;
+    margin: 0;
+    margin-top: 8px;
+    line-height: 1.5;
+    padding-top: 8px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

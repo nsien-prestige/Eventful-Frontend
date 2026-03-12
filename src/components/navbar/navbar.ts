@@ -13,6 +13,7 @@ export function renderNavbar(root: HTMLElement) {
 
     // detect route to auto-set active tab
     const path = window.location.pathname;
+    const isExplore = path.startsWith("/explore");
     const isCreate = path.startsWith("/create");
     const isMyEvents = path.startsWith("/my-events")
 
@@ -22,7 +23,7 @@ export function renderNavbar(root: HTMLElement) {
         </div>
 
         <nav class="nav-center">
-            <button id="buy-btn" class="nav-pill ${!isCreate && !isMyEvents ? "active" : ""}">
+            <button id="buy-btn" class="nav-pill ${isExplore? "active" : ""}">
                 Explore
             </button>
 
