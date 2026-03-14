@@ -184,17 +184,12 @@ export function collapsePricingSection(): void {
     }, 350);
 }
 
-/**
- * Update completion status
- */
+
 export function updatePricingStatus(): void {
     const { hasCompleteTicket } = checkPricingCompletion();
     isPricingSectionComplete = hasCompleteTicket;
 }
 
-/**
- * Check if clicked outside pricing section
- */
 function isClickOutsidePricing(target: HTMLElement): boolean {
     const pricingSection = document.querySelector(".pricing-section");
     if (!pricingSection) return false;
@@ -202,9 +197,6 @@ function isClickOutsidePricing(target: HTMLElement): boolean {
     return !pricingSection.contains(target);
 }
 
-/**
- * Setup header click to re-expand
- */
 export function setupPricingHeaderClick(): void {
     const header = document.getElementById("pricingHeader");
     if (!header) return;
@@ -220,9 +212,6 @@ export function setupPricingHeaderClick(): void {
     });
 }
 
-/**
- * Setup click-outside detection
- */
 export function setupPricingClickOutside(): void {
     document.addEventListener("click", (e) => {
         const target = e.target as HTMLElement;
@@ -232,16 +221,12 @@ export function setupPricingClickOutside(): void {
         
         const { allComplete } = checkPricingCompletion();
         
-        // ONLY collapse if ALL tickets complete AND clicked outside
         if (allComplete && isClickOutsidePricing(target)) {
             collapsePricingSection();
         }
     });
 }
 
-/**
- * Monitor pricing inputs
- */
 export function monitorPricingInputs(): void {
     const observer = new MutationObserver(() => {
         updatePricingStatus();

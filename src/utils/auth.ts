@@ -36,3 +36,34 @@ export function isCreator(): boolean {
     return roles ? roles.includes("creator") : false;
 }
 
+export function isTokenExpired(): boolean {
+    const token = getToken();
+    if (!token) return true;
+
+    const decoded = decodeJWT(token);
+    if (!decoded || !decoded.exp) return true;
+
+    // exp is in seconds, Date.now() is in milliseconds
+    return decoded.exp * 1000 < Date.now();
+}
+
+export function isTokenValid(): boolean {
+    return isLoggedIn() && !isTokenExpired();
+}
+
+export function requireAuth(): boolean {
+    if (!isTokenValid()) {
+        logout();
+        
+        // Save current page to redirect back after login
+        const currentPath = window.location.pathname;
+        if (currentPath !== '/login' && currentPath !== '/signup') {
+            sessionStorage.setItem('redirectAfterLogin', currentPath);
+        }
+        
+        window.location.href = '/login';
+        return false;
+    }
+    return true;
+}
+

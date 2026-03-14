@@ -2,9 +2,10 @@
 import "./createEventPage.css";
 import { initDatePickers } from "../../components/date-picker/DatePicker";
 
-import { renderTitleSection, setupTitleSection }         from "./utils/titleSection";
+import { getTitleData, renderTitleSection, setupTitleSection }         from "./utils/titleSection";
 import { renderDateSection, setupDateSection,
-         restoreDateHeader }                             from "./utils/dateSection";
+         restoreDateHeader, 
+         getDateData}                             from "./utils/dateSection";
 import { setupImageUpload }                              from "./utils/imageUpload";
 import { setupCollapsible }                              from "./utils/collapsible";
 import { loadGoogleMaps }                                from "./utils/googleMaps";
@@ -14,6 +15,8 @@ import { setupAddSectionLogic }                          from "./utils/addSectio
 import { createEvent } from "../../api/createEvent.api";
 import { showMessage } from "../../components/notify/notify";
 import { navigate } from "../../router";
+import { highlightInvalidFields, showValidationErrors, validateEventForm } from "../../utils/validation";
+import { requireAuth } from "../../utils/auth";
 
 export { getAgendaData }  from "./utils/agendaSection";
 export { getTitleData }   from "./utils/titleSection";
@@ -134,29 +137,48 @@ function setupCreateButton(): void {
     createBtn.addEventListener("click", async (e) => {
         e.preventDefault();
         
-        // Add loading state
+        if (!requireAuth()) {
+            return; // Will redirect to login
+        }
+ 
+        const titleData = getTitleData();
+        const dateData = getDateData();
+ 
+        const validation = validateEventForm({
+            title: titleData.title,
+            summary: titleData.summary,
+            description: titleData.description,
+            organizer: titleData.organizer,
+            category: titleData.category,
+            date: dateData.date,
+            endDate: dateData.endDate,
+            venueAddress: dateData.venueAddress,
+            meetingLink: dateData.meetingLink,
+            locationType: dateData.locationType,
+        });
+ 
+        if (!validation.isValid) {
+            showValidationErrors(validation.errors);
+            highlightInvalidFields(validation.errors);
+            return;
+        }
+        
         createBtn.classList.add("loading");
         createBtn.setAttribute("disabled", "true");
         
         try {
-            // Call API to create event
             const result = await createEvent();
             
-            // Success!
             showMessage("Event created successfully! 🎉", "success");
             
-            // Navigate to event details or my events page
             setTimeout(() => {
-                navigate(`/event/${result.publicId}`);
-                // OR: navigate("/my-events");
+                navigate(`/event/${result.event.publicId}`);
             }, 1000);
             
         } catch (error: any) {
-            // Error handling
             console.error("Create event error:", error);
             showMessage(error.message || "Failed to create event", "error");
             
-            // Remove loading state on error
             createBtn.classList.remove("loading");
             createBtn.removeAttribute("disabled");
         }

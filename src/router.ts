@@ -4,7 +4,7 @@ import { renderSignup } from "./pages/signup/signup";
 import { renderNavbar } from "./components/navbar/navbar";
 import { renderExplore } from "./pages/explore/explore";
 import { renderCreateLanding } from "./pages/create/createLanding";
-import { isLoggedIn } from "./utils/auth";
+import { isLoggedIn, requireAuth } from "./utils/auth";
 import { renderMyEvents } from "./pages/my-events/my-events";
 import { renderEventDetails } from "./pages/event-details/event-details";
 import { renderCreateEventPage } from "./pages/create/createEventPage";
@@ -18,10 +18,11 @@ const routes: Record<string, () => void> = {
     "/create": renderCreateLanding,
     "/my-events": renderMyEvents,
     "/create/new": renderCreateEventPage
-
 };
 
 const authRoutes = ["/login", "/signup"];
+
+const protectedRoutes = ["/create/new", "/my-events"];
 
 export function navigate(path: string) {
     applyTheme(path)
@@ -40,9 +41,17 @@ export function router() {
 
     const loggedIn = isLoggedIn();
 
+    if (protectedRoutes.includes(path)) {
+        if (!requireAuth()) {
+            return;
+        }
+    }
+
     // 🚫 Prevent logged-in users from visiting auth pages
     if (authRoutes.includes(path) && loggedIn) {
-        navigate("/");
+        const redirectTo = sessionStorage.getItem('redirectAfterLogin') || '/';
+        sessionStorage.removeItem('redirectAfterLogin');
+        navigate(redirectTo);
         return;
     }
 
@@ -74,4 +83,3 @@ function applyTheme(path: string) {
         document.body.removeAttribute("data-theme");
     }
 }
-
