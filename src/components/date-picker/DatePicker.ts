@@ -1,14 +1,10 @@
 import flatpickr from "flatpickr";
 import type { Instance } from "flatpickr/dist/types/instance";
 import "flatpickr/dist/flatpickr.css";
-import "./DatePicker.css";
+import "./datePicker.css";
 
 let datePicker: Instance;
 
-/**
- * Initialize ONLY the date picker
- * Time pickers are now handled by the custom timePickerHelper
- */
 export function initDatePickers() {
   const dateInput = document.getElementById("eventDate") as HTMLInputElement;
 
@@ -17,7 +13,7 @@ export function initDatePickers() {
   /* ---------------- DATE PICKER ---------------- */
   datePicker = flatpickr(dateInput, {
     altInput: true,
-    altFormat: "D, M j, Y", // Wed, Mar 5, 2026
+    altFormat: "D, M j, Y", 
     dateFormat: "Y-m-d",
     disableMobile: true,
     animate: true,
@@ -27,10 +23,6 @@ export function initDatePickers() {
   });
 }
 
-/**
- * Get event date and time values
- * Now gets time from the custom time picker inputs
- */
 export function getEventDateTimeValues() {
   const startTimeInput = document.getElementById("startTime") as HTMLInputElement;
   const endTimeInput = document.getElementById("endTime") as HTMLInputElement;
