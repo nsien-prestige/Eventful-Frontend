@@ -1,294 +1,304 @@
 import "./home.css";
 import { navigate } from "../../router";
 
+function renderShareIcon() {
+    return `
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3v12M7.5 7.5 12 3l4.5 4.5M5 14.5v4a1.5 1.5 0 0 0 1.5 1.5h11a1.5 1.5 0 0 0 1.5-1.5v-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    `;
+}
+
+function renderArrowIcon() {
+    return `
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    `;
+}
+
 export function renderHomePage() {
     const app = document.getElementById("app")!;
 
     app.innerHTML = `
         <div class="home-page">
-            <!-- HERO SECTION -->
-            <section class="hero-section">
-                <div class="hero-container">
-                    <h1>Everything you need to run events</h1>
-                    <p>A complete toolkit for event creators and attendees, built with modern tools that just work.</p>
-                    <div class="hero-actions">
-                        <button class="btn-primary" id="getStartedBtn">Get started</button>
-                        <button class="btn-secondary" id="exploreBtn">Explore events</button>
+            <div class="home-noise"></div>
+            <div class="home-orb orb-one"></div>
+            <div class="home-orb orb-two"></div>
+            <div class="home-orb orb-three"></div>
+            <div class="home-grid"></div>
+
+            <section class="home-hero" id="home-top">
+                <div class="hero-shell">
+                    <div class="hero-copy reveal">
+                        <div class="eyebrow-chip">
+                            <span class="eyebrow-dot"></span>
+                            <span>Eventful for modern gatherings</span>
+                        </div>
+
+                        <p class="hero-lead-label">Discover. Host. Fill the room.</p>
+
+                        <h1>
+                            Event pages with
+                            <span>presence, pace, and a reason to buy now.</span>
+                        </h1>
+
+                        <p class="hero-description">
+                            Eventful gives creators a bolder way to launch and gives attendees a smoother way to discover what deserves their evening.
+                        </p>
+
+                        <div class="hero-actions">
+                            <button class="hero-primary" id="getStartedBtn">
+                                <span>Create an event</span>
+                                ${renderArrowIcon()}
+                            </button>
+                            <button class="hero-secondary" id="exploreBtn">
+                                <span>Explore events</span>
+                            </button>
+                        </div>
+
+                        <div class="hero-inline-proof">
+                            <span>Curated discovery</span>
+                            <span>Faster checkout</span>
+                            <span>Verified entry</span>
+                        </div>
+                    </div>
+
+                    <div class="hero-stage reveal delay-2">
+                        <article class="hero-poster-card poster-main">
+                            <div class="poster-image poster-one"></div>
+                            <div class="poster-content">
+                                <span class="poster-tag">Editor’s selection</span>
+                                <h2>After Dark on the Marina</h2>
+                                <p>A sharper event page, cleaner social proof, and the kind of atmosphere people screenshot before they even arrive.</p>
+                                <div class="poster-meta">
+                                    <span>Friday · 8 PM</span>
+                                    <span>Victoria Island</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="hero-poster-card poster-side attendance-card">
+                            <span class="mini-chip">Momentum</span>
+                            <strong>92%</strong>
+                            <p>Capacity already claimed for tonight’s featured experience.</p>
+                        </article>
+
+                        <article class="hero-poster-card poster-side volume-card">
+                            <span class="mini-chip">Live usage</span>
+                            <strong>340k+</strong>
+                            <p>Tickets already explored, saved, and booked through Eventful’s flow.</p>
+                        </article>
                     </div>
                 </div>
             </section>
 
-            <!-- FEATURES SECTION -->
-            <section class="features-section">
-                <div class="features-container">
-                    <div class="features-grid">
-                        <div class="feature-card">
-                            <div class="feature-icon teal">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <rect x="3" y="3" width="7" height="7" rx="1"/>
-                                    <rect x="3" y="14" width="7" height="7" rx="1"/>
-                                    <rect x="14" y="3" width="7" height="7" rx="1"/>
-                                    <rect x="14" y="14" width="7" height="7" rx="1"/>
-                                </svg>
-                            </div>
-                            <h3>QR Code Tickets</h3>
-                            <p>Unique QR codes for seamless, fraud-proof check-in at every event.</p>
-                        </div>
+            <section class="home-marquee-strip reveal delay-3" aria-label="Eventful capabilities">
+                <div class="marquee-track">
+                    <span>Premium event pages</span>
+                    <span>Live ticket drops</span>
+                    <span>Fast discovery flow</span>
+                    <span>Creator analytics</span>
+                    <span>QR-based entry</span>
+                    <span>Reminder-friendly booking</span>
+                    <span>Premium event pages</span>
+                    <span>Live ticket drops</span>
+                    <span>Fast discovery flow</span>
+                    <span>Creator analytics</span>
+                    <span>QR-based entry</span>
+                    <span>Reminder-friendly booking</span>
+                </div>
+            </section>
 
-                        <div class="feature-card">
-                            <div class="feature-icon blue">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <path d="M12 6v6l4 2"/>
-                                </svg>
-                            </div>
-                            <h3>Secure Payments</h3>
-                            <p>Integrated with Paystack for safe, instant payment processing.</p>
-                        </div>
+            <section class="home-manifesto" id="home-features">
+                <div class="section-shell">
+                    <div class="section-heading reveal">
+                        <span class="section-chip">What makes it different</span>
+                        <h2>Not another beige ticket page. Not another cluttered event directory.</h2>
+                    </div>
 
-                        <div class="feature-card">
-                            <div class="feature-icon purple">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                                    <line x1="12" y1="22.08" x2="12" y2="12"/>
-                                </svg>
-                            </div>
-                            <h3>Analytics & Charts</h3>
-                            <p>Interactive charts for revenue, tickets, and attendee insights.</p>
-                        </div>
+                    <div class="manifesto-grid">
+                        <article class="manifesto-card reveal">
+                            <span class="manifesto-kicker">For attendees</span>
+                            <h3>Discovery should feel like curation, not admin.</h3>
+                            <p>Surface events with stronger visual identity, clearer timing, and fewer dead-end clicks between curiosity and checkout.</p>
+                        </article>
 
-                        <div class="feature-card">
-                            <div class="feature-icon red">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                    <polyline points="22 4 12 14.01 9 11.01"/>
-                                </svg>
-                            </div>
-                            <h3>Ticket Verification</h3>
-                            <p>Scan and verify tickets instantly at the door. No fakes.</p>
-                        </div>
+                        <article class="manifesto-card feature-tall reveal delay-2">
+                            <span class="manifesto-kicker">For creators</span>
+                            <h3>Launch pages that feel intentional before the crowd even shows up.</h3>
+                            <p>Better storytelling, better perception, and a calmer operations flow after tickets go live.</p>
+                            <ul class="manifesto-points">
+                                <li>Distinct ticket tiers and live availability</li>
+                                <li>Structured agenda and polished media blocks</li>
+                                <li>Cleaner actions for saving, sharing, and reminders</li>
+                            </ul>
+                        </article>
 
-                        <div class="feature-card">
-                            <div class="feature-icon cyan">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="11" cy="11" r="8"/>
-                                    <path d="m21 21-4.35-4.35"/>
-                                </svg>
-                            </div>
-                            <h3>Search & Filters</h3>
-                            <p>Find events by keyword, category, date range, and price.</p>
-                        </div>
-
-                        <div class="feature-card">
-                            <div class="feature-icon amber">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
-                                </svg>
-                            </div>
-                            <h3>Bookmark Events</h3>
-                            <p>Save events you love and come back to them anytime.</p>
-                        </div>
-
-                        <div class="feature-card">
-                            <div class="feature-icon orange">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <polyline points="12 6 12 12 16 14"/>
-                                </svg>
-                            </div>
-                            <h3>Waitlist System</h3>
-                            <p>Join the waitlist for sold-out events and get notified instantly when a spot opens up.</p>
-                        </div>
-
-                        <div class="feature-card">
-                            <div class="feature-icon yellow">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-                                    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-                                </svg>
-                            </div>
-                            <h3>Smart Reminders</h3>
-                            <p>Set reminders for upcoming events so you never miss a moment.</p>
-                        </div>
+                        <article class="manifesto-card accent reveal delay-3">
+                            <span class="manifesto-kicker">What people remember</span>
+                            <h3>The page looked good enough to trust instantly.</h3>
+                            <p>That first impression matters. Eventful turns event discovery into something more magnetic and event creation into something more premium.</p>
+                        </article>
                     </div>
                 </div>
             </section>
 
-            <!-- EVENTS SECTION -->
-            <section class="events-section">
-                <div class="events-container">
-                    <div class="section-header">
-                        <h2>Upcoming events</h2>
-                        <button class="btn-text" id="viewAllBtn">View all →</button>
+            <section class="home-showcase" id="home-discover">
+                <div class="section-shell showcase-shell">
+                    <div class="showcase-heading reveal">
+                        <span class="section-chip">Featured events</span>
+                        <h2>The kind of events people stop scrolling for.</h2>
+                        <button class="section-link" id="viewAllBtn">View all events</button>
                     </div>
-                    <div class="events-grid">
-                        <div class="event-card">
-                            <div class="event-image">
-                                <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=600&h=400&fit=crop" alt="Music event" />
-                                <span class="event-category">Music</span>
+
+                    <div class="curated-grid">
+                        <article class="curated-event reveal">
+                            <div class="curated-media media-one">
+                                <button class="share-event-btn" type="button" aria-label="Share Lagos Jazz Festival 2026" data-share-url="/events/lagos-jazz-festival-2026">
+                                    ${renderShareIcon()}
+                                </button>
+                                <span class="curated-category">Music</span>
                             </div>
-                            <div class="event-content">
+                            <div class="curated-copy">
                                 <h3>Lagos Jazz Festival 2026</h3>
-                                <div class="event-detail">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                        <line x1="16" y1="2" x2="16" y2="6"/>
-                                        <line x1="8" y1="2" x2="8" y2="6"/>
-                                        <line x1="3" y1="10" x2="21" y2="10"/>
-                                    </svg>
-                                    <span>Mar 22, 2026</span>
+                                <p>Live brass, warmer lighting, and a booking flow that feels as smooth as the lineup.</p>
+                                <div class="curated-meta">
+                                    <span>March 22, 2026</span>
+                                    <span>Terra Kulture</span>
                                 </div>
-                                <div class="event-detail">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                                        <circle cx="12" cy="10" r="3"/>
-                                    </svg>
-                                    <span>Terra Kulture, Victoria Island</span>
-                                </div>
-                                <div class="event-footer">
-                                    <span class="event-price">NGN 5,000</span>
-                                    <span class="event-spots">234/500 spots</span>
+                                <div class="curated-footer">
+                                    <strong>NGN 5,000</strong>
+                                    <span>234 of 500 spots</span>
                                 </div>
                             </div>
-                        </div>
+                        </article>
 
-                        <div class="event-card">
-                            <div class="event-image">
-                                <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=600&h=400&fit=crop" alt="Tech event" />
-                                <span class="event-category">Technology</span>
+                        <article class="curated-event reveal delay-2">
+                            <div class="curated-media media-two">
+                                <button class="share-event-btn" type="button" aria-label="Share Tech Founders Meetup" data-share-url="/events/tech-founders-meetup">
+                                    ${renderShareIcon()}
+                                </button>
+                                <span class="curated-category">Technology</span>
                             </div>
-                            <div class="event-content">
+                            <div class="curated-copy">
                                 <h3>Tech Founders Meetup</h3>
-                                <div class="event-detail">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                        <line x1="16" y1="2" x2="16" y2="6"/>
-                                        <line x1="8" y1="2" x2="8" y2="6"/>
-                                        <line x1="3" y1="10" x2="21" y2="10"/>
-                                    </svg>
-                                    <span>Mar 18, 2026</span>
+                                <p>For builders, operators, and product minds who want something more considered than another noisy meetup listing.</p>
+                                <div class="curated-meta">
+                                    <span>March 18, 2026</span>
+                                    <span>CcHub, Yaba</span>
                                 </div>
-                                <div class="event-detail">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                                        <circle cx="12" cy="10" r="3"/>
-                                    </svg>
-                                    <span>CcHub, Yaba, Lagos</span>
-                                </div>
-                                <div class="event-footer">
-                                    <span class="event-price">Free</span>
-                                    <span class="event-spots">89/150 spots</span>
+                                <div class="curated-footer">
+                                    <strong>Free</strong>
+                                    <span>89 of 150 spots</span>
                                 </div>
                             </div>
-                        </div>
+                        </article>
 
-                        <div class="event-card">
-                            <div class="event-image">
-                                <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&h=400&fit=crop" alt="Food event" />
-                                <span class="event-category">Food & Drink</span>
+                        <article class="curated-event reveal delay-3">
+                            <div class="curated-media media-three">
+                                <button class="share-event-btn" type="button" aria-label="Share Nigerian Food Festival" data-share-url="/events/nigerian-food-festival">
+                                    ${renderShareIcon()}
+                                </button>
+                                <span class="curated-category">Food & drink</span>
                             </div>
-                            <div class="event-content">
+                            <div class="curated-copy">
                                 <h3>Nigerian Food Festival</h3>
-                                <div class="event-detail">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                        <line x1="16" y1="2" x2="16" y2="6"/>
-                                        <line x1="8" y1="2" x2="8" y2="6"/>
-                                        <line x1="3" y1="10" x2="21" y2="10"/>
-                                    </svg>
-                                    <span>Mar 25, 2026</span>
-                                </div>
-                                <div class="event-detail">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                                        <circle cx="12" cy="10" r="3"/>
-                                    </svg>
+                                <p>Rich textures, memorable flavors, and a sharper way to bring cultural events online.</p>
+                                <div class="curated-meta">
+                                    <span>March 25, 2026</span>
                                     <span>Eko Convention Centre</span>
                                 </div>
-                                <div class="event-footer">
-                                    <span class="event-price">NGN 3,500</span>
-                                    <span class="event-spots">412/600 spots</span>
+                                <div class="curated-footer">
+                                    <strong>NGN 3,500</strong>
+                                    <span>412 of 600 spots</span>
                                 </div>
                             </div>
-                        </div>
+                        </article>
                     </div>
                 </div>
             </section>
 
-            <!-- HOW IT WORKS -->
-            <section class="how-section">
-                <div class="how-container">
-                    <h2>How it works</h2>
-                    <div class="how-grid">
-                        <div class="how-card">
-                            <div class="how-number">1</div>
-                            <h3>Create your event</h3>
-                            <p>Set up your event page with all the details in minutes. Add images, pricing, and schedule.</p>
-                        </div>
-                        <div class="how-card">
-                            <div class="how-number">2</div>
-                            <h3>Sell tickets</h3>
-                            <p>Share your event and start selling. Track sales in real-time from your dashboard.</p>
-                        </div>
-                        <div class="how-card">
-                            <div class="how-number">3</div>
-                            <h3>Host your event</h3>
-                            <p>Check in attendees with QR codes and manage everything seamlessly.</p>
-                        </div>
+            <section class="home-structure" id="home-how">
+                <div class="section-shell structure-shell">
+                    <div class="structure-copy reveal">
+                        <span class="section-chip">How it works</span>
+                        <h2>A cleaner sequence from launch to full room.</h2>
+                    </div>
+
+                    <div class="structure-track">
+                        <article class="track-card reveal">
+                            <span class="track-number">01</span>
+                            <h3>Shape the page</h3>
+                            <p>Upload visuals, set the tone, define the experience, and make the event feel real before anyone arrives.</p>
+                        </article>
+
+                        <article class="track-card reveal delay-2">
+                            <span class="track-number">02</span>
+                            <h3>Open ticket sales</h3>
+                            <p>Launch with clearer ticket options, faster actions, and less clutter between interest and commitment.</p>
+                        </article>
+
+                        <article class="track-card reveal delay-3">
+                            <span class="track-number">03</span>
+                            <h3>Run it beautifully</h3>
+                            <p>Use reminders, sharing, discovery, and event-day verification to keep momentum high and friction low.</p>
+                        </article>
                     </div>
                 </div>
             </section>
 
-            <!-- CTA SECTION -->
-            <section class="cta-section">
-                <div class="cta-container">
-                    <h2>Ready to get started?</h2>
-                    <p>Create your first event in minutes.</p>
-                    <button class="btn-primary" id="ctaBtn">Create an event</button>
+            <section class="home-cta" id="home-start">
+                <div class="section-shell">
+                    <div class="cta-panel reveal">
+                        <span class="section-chip inverse">Start here</span>
+                        <h2>Bring your next event online with more mood, more clarity, and more pull.</h2>
+                        <p>Eventful is for creators who want their event page to feel considered and for attendees who want something better than noise.</p>
+                        <div class="cta-actions">
+                            <button class="hero-primary light" id="ctaBtn">
+                                <span>Create an event</span>
+                                ${renderArrowIcon()}
+                            </button>
+                            <button class="hero-secondary light" id="ctaExploreBtn">
+                                <span>View events</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </section>
-
-            <!-- FOOTER -->
-            <footer class="footer">
-                <div class="footer-container">
-                    <div class="footer-grid">
-                        <div class="footer-col">
-                            <h4>Product</h4>
-                            <a href="/explore">Browse Events</a>
-                            <a href="/create">Create Event</a>
-                            <a href="#">Pricing</a>
-                        </div>
-                        <div class="footer-col">
-                            <h4>Company</h4>
-                            <a href="#">About</a>
-                            <a href="#">Blog</a>
-                            <a href="#">Careers</a>
-                        </div>
-                        <div class="footer-col">
-                            <h4>Resources</h4>
-                            <a href="#">Help Center</a>
-                            <a href="#">Contact</a>
-                            <a href="#">Community</a>
-                        </div>
-                        <div class="footer-col">
-                            <h4>Legal</h4>
-                            <a href="#">Privacy</a>
-                            <a href="#">Terms</a>
-                            <a href="#">Security</a>
-                        </div>
-                    </div>
-                    <div class="footer-bottom">
-                        <p>© ${new Date().getFullYear()} Eventful. All rights reserved.</p>
-                    </div>
-                </div>
-            </footer>
         </div>
     `;
 
-    // Setup event listeners
     document.getElementById("getStartedBtn")?.addEventListener("click", () => navigate("/create"));
     document.getElementById("exploreBtn")?.addEventListener("click", () => navigate("/explore"));
     document.getElementById("ctaBtn")?.addEventListener("click", () => navigate("/create"));
+    document.getElementById("ctaExploreBtn")?.addEventListener("click", () => navigate("/explore"));
     document.getElementById("viewAllBtn")?.addEventListener("click", () => navigate("/explore"));
+
+    document.querySelectorAll<HTMLButtonElement>(".share-event-btn").forEach((button) => {
+        button.addEventListener("click", async () => {
+            const sharePath = button.dataset.shareUrl;
+            if (!sharePath) return;
+
+            const shareUrl = new URL(sharePath, window.location.origin).toString();
+
+            try {
+                if (navigator.share) {
+                    await navigator.share({
+                        title: "Eventful event",
+                        url: shareUrl,
+                    });
+                } else {
+                    await navigator.clipboard.writeText(shareUrl);
+                    const originalLabel = button.innerHTML;
+                    button.textContent = "Copied";
+                    window.setTimeout(() => {
+                        button.innerHTML = originalLabel;
+                    }, 1400);
+                }
+            } catch {
+                // Ignore cancelled shares and clipboard failures silently.
+            }
+        });
+    });
 }

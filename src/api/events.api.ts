@@ -20,3 +20,4 @@ export async function getEvent(publicId: string) {
     return res.json();
 }
 
+

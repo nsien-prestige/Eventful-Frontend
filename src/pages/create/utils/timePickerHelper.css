@@ -69,8 +69,8 @@
 
 /* Dropdown - Positioned directly below button */
 .time-picker-dropdown {
-    position: absolute;
-    top: calc(100% + 4px);
+    position: fixed;
+    top: 0;
     left: 0;
     background: #fff;
     border: 1px solid #d1d5db;
@@ -78,27 +78,39 @@
     box-shadow: 
         0 4px 6px -1px rgba(0, 0, 0, 0.1),
         0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    z-index: 1000;
+    z-index: 1401;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-4px);
     transition: all 0.15s ease;
     width: 160px;
-    max-height: 0;
+    max-height: 260px;
     overflow: hidden;
+    pointer-events: none;
 }
 
 .time-picker-dropdown.active {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
-    max-height: 260px;
+    pointer-events: auto;
+}
+
+.time-picker-dropdown.open-upward {
+    transform: translateY(4px);
+}
+
+.time-picker-dropdown.open-upward.active {
+    transform: translateY(0);
 }
 
 .time-picker-list {
-    max-height: 260px;
+    height: 260px;
     overflow-y: auto;
+    overflow-x: hidden;
     padding: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: #a8b4c6 #eef3f8;
 }
 
 /* Custom scrollbar */
@@ -147,19 +159,6 @@
     background: #2948c7;
 }
 
-/* Overlay - covers screen to detect outside clicks */
-.time-picker-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 999;
-    background: transparent;
-    display: none;
-}
-
-.time-picker-overlay.active {
-    display: block;
-}
-
 /* Hidden input */
 .time-picker-input {
     position: absolute;
@@ -176,4 +175,36 @@
     grid-template-columns: 1fr auto auto;
     gap: 12px;
     align-items: start;
+}
+
+/* Create page visual polish */
+.create-page .time-picker-btn {
+    border-color: #d7deea;
+    border-radius: 14px;
+    background: rgba(251, 253, 255, 0.96);
+    color: #33415b;
+}
+
+.create-page .time-picker-btn:hover {
+    border-color: #8ea8ea;
+}
+
+.create-page .time-picker-btn.active {
+    border-color: #7f9be7;
+    box-shadow: 0 0 0 4px rgba(54, 89, 227, 0.08);
+}
+
+.create-page .time-picker-btn.has-value {
+    border-color: #7f9be7;
+    color: #18253d;
+}
+
+.create-page .time-picker-btn.has-value svg {
+    color: #3659e3;
+}
+
+.create-page .time-picker-dropdown {
+    border-color: #dbe3ef;
+    border-radius: 16px;
+    box-shadow: 0 20px 42px rgba(32, 55, 92, 0.12);
 }

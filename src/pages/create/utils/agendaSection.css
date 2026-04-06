@@ -492,3 +492,42 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+/* Create page visual polish */
+.create-page .agenda-slot-card,
+.create-page .agenda-preview-slot {
+    border-radius: 20px;
+    background: linear-gradient(180deg, rgba(250, 252, 255, 0.96), rgba(255, 255, 255, 0.96));
+}
+
+.create-page .agenda-slot-card:hover,
+.create-page .agenda-slot-card.collapsed:hover {
+    border-color: #c8d4e8;
+    box-shadow: 0 14px 32px rgba(32, 55, 92, 0.08);
+}
+
+.create-page .agenda-slot-title-input,
+.create-page .agenda-collapsible-field {
+    border-color: #d7deea;
+    border-radius: 14px;
+    background: rgba(251, 253, 255, 0.96);
+}
+
+.create-page .agenda-inline-btn {
+    border-radius: 12px;
+    background: rgba(246, 249, 255, 0.92);
+}
+
+.create-page .agenda-inline-btn:hover {
+    background: rgba(238, 244, 255, 0.96);
+}
+
+.create-page .agenda-add-slot-btn {
+    border-radius: 16px;
+    background: linear-gradient(180deg, #f5f8ff, #edf3ff);
+    color: #3151cc;
+}
+
+.create-page .agenda-add-slot-btn:hover {
+    background: linear-gradient(180deg, #edf3ff, #e6eefc);
+}

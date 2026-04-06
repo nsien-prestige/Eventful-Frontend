@@ -29,7 +29,6 @@ export function renderCreateEventPage(): void {
 
     app.innerHTML = `
         <div class="create-page" id="createPageRoot">
-
             <!-- IMAGE SECTION -->
             <div class="section-card">
                 <h2>Event Image</h2>
@@ -109,7 +108,6 @@ export function renderCreateEventPage(): void {
                     </p>
                 </div>
             </div>
-
         </div>
     `;
 

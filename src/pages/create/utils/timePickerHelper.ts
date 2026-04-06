@@ -35,6 +35,7 @@ export function setupTimePicker(
 ): void {
     let isOpen = false;
     let selectedValue = "";
+    const DROPDOWN_HEIGHT = 260;
     
     // CRITICAL: Wrap button in a positioning container
     const wrapper = document.createElement("div");
@@ -55,36 +56,70 @@ export function setupTimePicker(
         </div>
     `;
     
-    // Insert dropdown INSIDE wrapper (after button)
-    wrapper.appendChild(dropdown);
-    
-    // Create overlay for click-outside-to-close
-    const overlay = document.createElement("div");
-    overlay.className = "time-picker-overlay";
-    document.body.appendChild(overlay);
+    const listEl = dropdown.querySelector(".time-picker-list") as HTMLElement;
+    document.body.appendChild(dropdown);
+
+    function positionDropdown() {
+        const rect = btn.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const viewportWidth = window.innerWidth;
+        const spaceBelow = viewportHeight - rect.bottom;
+        const openUpward = spaceBelow < DROPDOWN_HEIGHT + 20 && rect.top > spaceBelow;
+        const top = openUpward
+            ? Math.max(12, rect.top - DROPDOWN_HEIGHT - 6)
+            : Math.min(viewportHeight - DROPDOWN_HEIGHT - 12, rect.bottom + 6);
+        const left = Math.min(rect.left, viewportWidth - 180);
+        const width = Math.max(rect.width, 160);
+
+        dropdown.style.top = `${top}px`;
+        dropdown.style.left = `${Math.max(12, left)}px`;
+        dropdown.style.width = `${width}px`;
+        dropdown.classList.toggle("open-upward", openUpward);
+    }
+
+    function handleOutsidePointerDown(event: PointerEvent) {
+        const target = event.target as Node | null;
+        if (!target) return;
+        if (!wrapper.contains(target) && !dropdown.contains(target)) {
+            toggleDropdown(false);
+        }
+    }
+
+    function handleViewportChange() {
+        if (isOpen) {
+            positionDropdown();
+        }
+    }
     
     // Toggle dropdown
     function toggleDropdown(show?: boolean) {
         isOpen = show !== undefined ? show : !isOpen;
         
         if (isOpen) {
+            positionDropdown();
             dropdown.classList.add("active");
-            overlay.classList.add("active");
             btn.classList.add("active");
+            wrapper.classList.add("is-open");
+            document.addEventListener("pointerdown", handleOutsidePointerDown);
+            window.addEventListener("resize", handleViewportChange);
+            window.addEventListener("scroll", handleViewportChange, true);
             
             // Scroll to selected option
             if (selectedValue) {
                 const selectedOption = dropdown.querySelector(`[data-value="${selectedValue}"]`);
                 if (selectedOption) {
                     setTimeout(() => {
-                        selectedOption.scrollIntoView({ block: "nearest", behavior: "smooth" });
+                        selectedOption.scrollIntoView({ block: "center", behavior: "smooth" });
                     }, 10);
                 }
             }
         } else {
             dropdown.classList.remove("active");
-            overlay.classList.remove("active");
             btn.classList.remove("active");
+            wrapper.classList.remove("is-open");
+            document.removeEventListener("pointerdown", handleOutsidePointerDown);
+            window.removeEventListener("resize", handleViewportChange);
+            window.removeEventListener("scroll", handleViewportChange, true);
         }
     }
     
@@ -128,12 +163,7 @@ export function setupTimePicker(
         // Close dropdown
         toggleDropdown(false);
     });
-    
-    // Overlay click (close)
-    overlay.addEventListener("click", () => {
-        toggleDropdown(false);
-    });
-    
+
     // Escape key
     document.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && isOpen) {
@@ -149,7 +179,7 @@ export function setupTimePicker(
             labelEl.textContent = matchingOption.display;
             btn.classList.add("has-value");
             
-            const optionEl = dropdown.querySelector(`[data-value="${matchingOption.value}"]`);
+            const optionEl = listEl.querySelector(`[data-value="${matchingOption.value}"]`);
             optionEl?.classList.add("selected");
         }
     }

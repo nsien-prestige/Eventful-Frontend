@@ -67,3 +67,40 @@ export function requireAuth(): boolean {
     return true;
 }
 
+export function getCurrentUserProfile() {
+    const token = getToken();
+    if (!token) return null;
+
+    const decoded = decodeJWT(token);
+    if (!decoded) return null;
+
+    const firstName = decoded.firstName || decoded.first_name || decoded.given_name || "";
+    const lastName = decoded.lastName || decoded.last_name || decoded.family_name || "";
+    const fullName = [firstName, lastName].filter(Boolean).join(" ").trim();
+    const email = decoded.email || "";
+
+    let fallbackName = "";
+    if (!fullName && email) {
+        const emailPrefix = String(email).split("@")[0];
+        fallbackName = emailPrefix
+            .split(/[._-]+/)
+            .filter(Boolean)
+            .map((part: string) => part.charAt(0).toUpperCase() + part.slice(1))
+            .join(" ");
+    }
+
+    const displayName = fullName || fallbackName || "Eventful User";
+    const initials = displayName
+        .split(" ")
+        .filter(Boolean)
+        .slice(0, 2)
+        .map((part: string) => part.charAt(0).toUpperCase())
+        .join("");
+
+    return {
+        displayName,
+        initials: initials || "EU",
+        email,
+    };
+}
+

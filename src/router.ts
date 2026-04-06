@@ -8,6 +8,7 @@ import { isLoggedIn, requireAuth } from "./utils/auth";
 import { renderMyEvents } from "./pages/my-events/my-events";
 import { renderEventDetails } from "./pages/event-details/event-details";
 import { renderCreateEventPage } from "./pages/create/createEventPage";
+import { renderDashboard } from "./pages/dashboard/dashboard";
 
 
 const routes: Record<string, () => void> = {
@@ -17,12 +18,13 @@ const routes: Record<string, () => void> = {
     "/explore": renderExplore,
     "/create": renderCreateLanding,
     "/my-events": renderMyEvents,
+    "/dashboard": renderDashboard,
     "/create/new": renderCreateEventPage
 };
 
 const authRoutes = ["/login", "/signup"];
 
-const protectedRoutes = ["/create/new", "/my-events"];
+const protectedRoutes = ["/create/new", "/my-events", "/dashboard"];
 
 export function navigate(path: string) {
     applyTheme(path)

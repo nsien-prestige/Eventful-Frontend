@@ -112,6 +112,40 @@
     pointer-events: none;
 }
 
+/* Create page visual polish */
+.create-page .loc-pill {
+    border: 1px solid #d7deea;
+    border-radius: 14px;
+    background: rgba(250, 252, 255, 0.94);
+    color: #33415b;
+    font-weight: 600;
+}
+
+.create-page .loc-pill:hover {
+    border-color: #8ea8ea;
+    background: #f3f7ff;
+}
+
+.create-page .loc-pill.active {
+    background: linear-gradient(135deg, #3659e3 0%, #4d7de7 100%);
+    box-shadow: 0 12px 26px rgba(54, 89, 227, 0.18);
+}
+
+.create-page .floating-field input {
+    border: 1px solid #d7deea;
+    border-radius: 14px;
+    background: rgba(251, 253, 255, 0.96);
+}
+
+.create-page .floating-field input:focus {
+    border-color: #7f9be7;
+}
+
+.create-page .floating-field label {
+    background: transparent;
+    color: #8a96aa;
+}
+
 .floating-field input:focus + label,
 .floating-field input:not(:placeholder-shown) + label,
 .floating-field.has-value label {
@@ -120,6 +154,7 @@
     font-size: 12px;
     color: #3659e3;
     font-weight: 600;
+    background-color: #fff;
 }
 
 /* Location search wrapper */
