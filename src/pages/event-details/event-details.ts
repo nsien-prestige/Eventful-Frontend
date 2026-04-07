@@ -159,20 +159,54 @@ function renderPage(app: HTMLElement, event: any, publicId: string): void {
     const saved = isSaved(publicId);
     const hasImage = Boolean(event.imageUrl);
     const isOnline = Boolean(event.isOnline) || String(event.locationType || "").toLowerCase() === "online" || Boolean(event.meetingLink);
-    const price = Number(event.price || 0);
-    const isFree = price === 0;
-    const capacity = Number(event.capacity || event.totalTickets || 0);
+
+    // ── Price resolution ───────────────────────────────────────────────────
+    // Some events store a flat `price` field; others (created via the form)
+    // store pricing inside `tickets[]`. We resolve whichever is present.
+    const ticketsArr: any[] = Array.isArray(event.tickets) && event.tickets.length > 0
+        ? event.tickets : [];
+
+    // Derive a representative price: flat field → lowest paid ticket tier → 0
+    let resolvedPrice = 0;
+    const flatPrice = Number(event.price ?? "");
+    if (Number.isFinite(flatPrice) && flatPrice > 0) {
+        resolvedPrice = flatPrice;
+    } else if (ticketsArr.length > 0) {
+        // Find the lowest non-zero ticket price; if all are 0, stays 0 (free)
+        const paid = ticketsArr
+            .map((t: any) => Number(t.price ?? 0))
+            .filter((p) => Number.isFinite(p) && p > 0);
+        if (paid.length > 0) resolvedPrice = Math.min(...paid);
+    }
+
+    const price = resolvedPrice;
+    const isFree = price === 0 && ticketsArr.every((t: any) => {
+        const p = Number(t.price ?? 0);
+        return !Number.isFinite(p) || p === 0 || Boolean(t.isFree);
+    });
+
+    // ── Capacity resolution ────────────────────────────────────────────────
+    // Flat `capacity` → sum ticket quantities → 0 (unknown)
+    let resolvedCapacity = Number(event.capacity || event.totalTickets || 0);
+    if (resolvedCapacity === 0 && ticketsArr.length > 0) {
+        resolvedCapacity = ticketsArr.reduce((sum: number, t: any) => {
+            const qty = Number(t.quantity ?? 0);
+            return sum + (Number.isFinite(qty) ? qty : 0);
+        }, 0);
+    }
+
+    const capacity = resolvedCapacity;
     const sold = Number(event.ticketsSold || event.bookingsCount || 0);
     const capRatio = capacity > 0 ? Math.round((sold / capacity) * 100) : 0;
     const isAlmostFull = capRatio >= 80;
 
     // Ticket tiers from backend or fallback single tier
     const tiers: Array<{ name: string; price: number; available: number }> = 
-        (event.tickets && event.tickets.length > 0)
-            ? event.tickets.map((t: any) => ({
+        ticketsArr.length > 0
+            ? ticketsArr.map((t: any) => ({
                 name: t.name || "General",
-                price: Number(t.price || 0),
-                available: Number(t.quantity || 0) - Number(t.sold || 0),
+                price: Number.isFinite(Number(t.price)) ? Number(t.price) : 0,
+                available: Math.max(0, Number(t.quantity || 0) - Number(t.sold || 0)),
             }))
             : [{ name: isFree ? "Free entry" : "General Admission", price, available: Math.max(0, capacity - sold) }];
 
@@ -419,7 +453,7 @@ function renderPage(app: HTMLElement, event: any, publicId: string): void {
 
                         <!-- Buy CTA -->
                         <button class="ed-buy-btn ${isFree ? "free-event" : ""}" id="edBuyBtn">
-                            ${isFree ? "Get Ticket" : "Secure tickets"}
+                            ${isFree ? "Register for free" : "Secure tickets"}
                         </button>
 
                         <!-- Mini actions: reminder, notify, share -->
