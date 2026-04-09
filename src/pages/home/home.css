@@ -190,7 +190,7 @@
 /* ───────────────────────────────────────
    MAGNETIC CURSOR
 ─────────────────────────────────────── */
-* { cursor: none !important; }
+* { cursor: auto; }
 
 #hc-cursor {
     position: fixed;

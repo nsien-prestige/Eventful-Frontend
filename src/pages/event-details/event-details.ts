@@ -1,6 +1,7 @@
 import { getEvent } from "../../api/events.api";
 import { navigate } from "../../router";
 import { showMessage } from "../../components/notify/notify";
+import { initPayment } from "../../api/payment.api";
 import "./event-details.css";
 
 // ── localStorage keys ──────────────────────────────
@@ -812,15 +813,54 @@ function setupInteractions(
         if (e.target === overlay) overlay.classList.remove("show");
     });
 
-    document.getElementById("edModalConfirm")?.addEventListener("click", () => {
-        overlay.classList.remove("show");
-        // TODO: call backend booking API when connected
-        showToast(
-            isFree
-                ? "Registration confirmed! Check your email for details."
-                : "Redirecting to payment… (backend connector coming soon)",
-            "success"
-        );
+    document.getElementById("edModalConfirm")?.addEventListener("click", async () => {
+        if (isFree) {
+            // Free events — no payment needed, just confirm
+            overlay.classList.remove("show");
+            showToast("Registration confirmed! Check your email for details.", "success");
+            return;
+        }
+
+        // Paid event — call backend to init Paystack
+        const confirmBtn = document.getElementById("edModalConfirm") as HTMLButtonElement;
+        const originalText = confirmBtn.innerHTML;
+
+        // Loading state on button
+        confirmBtn.disabled = true;
+        confirmBtn.innerHTML = `
+            <span style="display:inline-flex;align-items:center;gap:8px;">
+                <span style="width:14px;height:14px;border-radius:50%;border:2px solid rgba(6,8,15,0.2);border-top-color:#06080f;animation:spin 0.7s linear infinite;display:inline-block;"></span>
+                Connecting to payment…
+            </span>
+        `;
+
+        try {
+            const { authorizationUrl } = await initPayment(event.id || publicId);
+
+            // Paystack will redirect back to /payment/callback?reference=...
+            // We need to tell Paystack our callback URL — this is set in your
+            // Paystack dashboard under Settings → API Keys & Webhooks → Callback URL.
+            // Set it to: https://yourdomain.com/payment/callback
+            // (or http://localhost:5173/payment/callback for local testing)
+
+            // Redirect to Paystack hosted payment page
+            window.location.href = authorizationUrl;
+
+        } catch (err: any) {
+            confirmBtn.disabled = false;
+            confirmBtn.innerHTML = originalText;
+            overlay.classList.remove("show");
+
+            const msg = err?.message || "Failed to initialize payment";
+
+            if (msg.toLowerCase().includes("already paid")) {
+                showToast("You've already purchased a ticket for this event.", "info");
+            } else if (msg.toLowerCase().includes("not found")) {
+                showToast("Event not found. Please try again.", "error");
+            } else {
+                showToast(msg, "error");
+            }
+        }
     });
 
     // ── Close panels on outside click ─────────

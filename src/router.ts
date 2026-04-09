@@ -9,7 +9,7 @@ import { renderMyEvents } from "./pages/my-events/my-events";
 import { renderEventDetails } from "./pages/event-details/event-details";
 import { renderCreateEventPage } from "./pages/create/createEventPage";
 import { renderDashboard } from "./pages/dashboard/dashboard";
-
+import { renderPaymentCallback } from "./pages/payment-callback/paymentCallback";
 
 const routes: Record<string, () => void> = {
     "/": renderHomePage,
@@ -19,7 +19,8 @@ const routes: Record<string, () => void> = {
     "/create": renderCreateLanding,
     "/my-events": renderMyEvents,
     "/dashboard": renderDashboard,
-    "/create/new": renderCreateEventPage
+    "/create/new": renderCreateEventPage,
+    "/payment/callback": renderPaymentCallback,
 };
 
 const authRoutes = ["/login", "/signup"];
@@ -27,8 +28,7 @@ const authRoutes = ["/login", "/signup"];
 const protectedRoutes = ["/create/new", "/my-events", "/dashboard"];
 
 export function navigate(path: string) {
-    applyTheme(path)
-
+    applyTheme(path);
     window.history.pushState({}, "", path);
     router();
 }
@@ -44,24 +44,24 @@ export function router() {
     const loggedIn = isLoggedIn();
 
     if (protectedRoutes.includes(path)) {
-        if (!requireAuth()) {
-            return;
-        }
+        if (!requireAuth()) return;
     }
 
-    // 🚫 Prevent logged-in users from visiting auth pages
+    // Prevent logged-in users from visiting auth pages
     if (authRoutes.includes(path) && loggedIn) {
-        const redirectTo = sessionStorage.getItem('redirectAfterLogin') || '/';
-        sessionStorage.removeItem('redirectAfterLogin');
+        const redirectTo = sessionStorage.getItem("redirectAfterLogin") || "/";
+        sessionStorage.removeItem("redirectAfterLogin");
         navigate(redirectTo);
         return;
     }
 
-    // 🎯 Hide navbar on auth pages
-    if (!authRoutes.includes(path)) {
+    // Hide navbar on auth pages and payment callback
+    const hideNavbarRoutes = [...authRoutes, "/payment/callback"];
+    if (!hideNavbarRoutes.includes(path)) {
         renderNavbar(navbarRoot);
     }
 
+    // Dynamic event detail route
     if (path.startsWith("/event/")) {
         const publicId = path.split("/event/")[1];
         renderEventDetails(publicId);

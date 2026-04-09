@@ -1,36 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&display=swap');
+
 .notify {
     position: fixed;
-    bottom: 2rem;
-    left: 2rem;
-    width: 300px;
-    padding: 0.8rem 1rem;
-    border-radius: 12px;
+    bottom: 28px;
+    right: 28px;
+    left: auto;
+    width: auto;
+    min-width: 280px;
+    max-width: 380px;
+    padding: 14px 18px;
+    border-radius: 14px;
+    font-family: 'Sora', sans-serif;
+    font-size: 0.84rem;
     font-weight: 600;
-    color: white;
-    z-index: 9999;
-    animation: slideIn 0.4s ease forwards;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-    text-align: left;
+    color: #eef2fa;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: notify-in 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+    border: 1px solid;
 }
 
+/* Success — acid yellow system */
 .notify.success {
-    background: linear-gradient(90deg, #16a34a, #22c55e);
+    background: rgba(200, 240, 74, 0.1);
+    border-color: rgba(200, 240, 74, 0.28);
+    color: #c8f04a;
 }
 
+.notify.success::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #c8f04a;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(200, 240, 74, 0.2);
+    animation: notify-dot-pulse 1.5s ease-in-out infinite;
+}
+
+/* Error — rose system */
 .notify.error {
-    background: linear-gradient(90deg, #dc2626, #ef4444);
+    background: rgba(240, 98, 146, 0.1);
+    border-color: rgba(240, 98, 146, 0.28);
+    color: #f06292;
+}
+
+.notify.error::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #f06292;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240, 98, 146, 0.2);
 }
 
 .notify.hide {
-    animation: slideOut 0.4s ease forwards;
+    animation: notify-out 0.35s cubic-bezier(0.7, 0, 0.84, 0) forwards;
 }
 
-@keyframes slideIn {
-    from { transform: translateX(-150%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
+@keyframes notify-in {
+    from {
+        opacity: 0;
+        transform: translateX(48px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
 }
 
-@keyframes slideOut {
-    from { transform: translateX(0); opacity: 1; }
-    to { transform: translateX(-150%); opacity: 0; }
+@keyframes notify-out {
+    from {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(48px) scale(0.95);
+    }
+}
+
+@keyframes notify-dot-pulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(200, 240, 74, 0.2); }
+    50%       { box-shadow: 0 0 0 6px rgba(200, 240, 74, 0); }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .notify {
+        bottom: 16px;
+        right: 16px;
+        left: 16px;
+        max-width: none;
+        width: auto;
+    }
 }

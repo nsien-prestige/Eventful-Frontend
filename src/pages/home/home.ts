@@ -2,55 +2,6 @@ import "./home.css";
 import { navigate } from "../../router";
 
 // ─────────────────────────────────────────────────────────────
-// MAGNETIC CURSOR
-// ─────────────────────────────────────────────────────────────
-function initMagneticCursor() {
-    const cursor = document.createElement("div");
-    cursor.id = "hc-cursor";
-    const dot = document.createElement("div");
-    dot.id = "hc-cursor-dot";
-    document.body.appendChild(cursor);
-    document.body.appendChild(dot);
-
-    let mx = -100, my = -100;
-    let cx = -100, cy = -100;
-    let dotX = -100, dotY = -100;
-
-    document.addEventListener("mousemove", (e) => {
-        mx = e.clientX;
-        my = e.clientY;
-    });
-
-    const raf = () => {
-        cx += (mx - cx) * 0.12;
-        cy += (my - cy) * 0.12;
-        dotX += (mx - dotX) * 0.4;
-        dotY += (my - dotY) * 0.4;
-        cursor.style.transform = `translate(${cx - 20}px, ${cy - 20}px)`;
-        dot.style.transform = `translate(${dotX - 4}px, ${dotY - 4}px)`;
-        requestAnimationFrame(raf);
-    };
-    requestAnimationFrame(raf);
-
-    // Magnetic expand on interactive elements
-    document.addEventListener("mouseover", (e) => {
-        const t = e.target as HTMLElement;
-        if (t.closest("button, a, [data-magnetic]")) {
-            cursor.classList.add("hc-cursor--expanded");
-        }
-    });
-    document.addEventListener("mouseout", (e) => {
-        const t = e.target as HTMLElement;
-        if (t.closest("button, a, [data-magnetic]")) {
-            cursor.classList.remove("hc-cursor--expanded");
-        }
-    });
-
-    document.addEventListener("mousedown", () => cursor.classList.add("hc-cursor--click"));
-    document.addEventListener("mouseup", () => cursor.classList.remove("hc-cursor--click"));
-}
-
-// ─────────────────────────────────────────────────────────────
 // GLITCH TEXT
 // ─────────────────────────────────────────────────────────────
 function initGlitchText() {
@@ -1093,7 +1044,6 @@ export function renderHomePage() {
         initHorizScroll();
         initGlitchText();
         initLiveTicker();
-        initMagneticCursor();
     });
 
     // ── Button wiring ────────────────────────────────

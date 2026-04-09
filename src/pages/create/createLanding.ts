@@ -5,279 +5,215 @@ export function renderCreateLanding() {
     const app = document.getElementById("app")!;
 
     app.innerHTML = `
-        <div class="create-landing">
-            <div class="landing-noise"></div>
-            <div class="landing-glow landing-glow-one"></div>
-            <div class="landing-glow landing-glow-two"></div>
+        <div class="cl-page">
 
-            <section class="creator-hero">
-                <div class="creator-hero-copy">
-                    <div class="creator-kicker">
-                        <span class="kicker-dot"></span>
+            <!-- Ambient -->
+            <div class="cl-ambient" aria-hidden="true">
+                <div class="cl-orb cl-orb-1"></div>
+                <div class="cl-orb cl-orb-2"></div>
+            </div>
+
+            <!-- ══ HERO ══ -->
+            <section class="cl-hero">
+                <div class="cl-shell">
+
+                    <div class="cl-eyebrow">
+                        <span class="cl-eyebrow-dot"></span>
                         <span>Eventful for creators</span>
                     </div>
 
-                    <h1 class="creator-title">
-                        Build the kind of event page
-                        <span>people want to buy from</span>
+                    <h1 class="cl-title">
+                        <span class="cl-title-line cl-line-mask">
+                            <span class="cl-line-inner">Your event.</span>
+                        </span>
+                        <span class="cl-title-line cl-line-mask">
+                            <span class="cl-line-inner cl-line-accent">Your page.</span>
+                        </span>
+                        <span class="cl-title-line cl-line-mask">
+                            <span class="cl-line-inner">Your crowd.</span>
+                        </span>
                     </h1>
 
-                    <p class="creator-subtitle">
-                        Launch polished event experiences with premium pages, fast checkout,
-                        and the tools you need to manage turnout without the usual stress.
+                    <p class="cl-sub">
+                        Build a polished event page, open ticket sales, and manage
+                        everything from one place — in minutes, not hours.
                     </p>
 
-                    <div class="creator-actions">
-                        <button class="primary-action" id="createEventBtn">
+                    <div class="cl-actions">
+                        <button class="cl-btn-primary" id="cl-start-btn">
                             <span>Start creating</span>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
                             </svg>
                         </button>
-
-                        <button class="secondary-action" id="exploreBtn">
-                            <span>Explore events</span>
+                        <button class="cl-btn-ghost" id="cl-explore-btn">
+                            Browse events
                         </button>
                     </div>
 
-                    <div class="creator-pills">
-                        <span>Beautiful event pages</span>
-                        <span>Fast checkout flow</span>
-                        <span>Real-time performance</span>
-                    </div>
-
-                    <div class="creator-stats">
-                        <div class="creator-stat">
-                            <div class="stat-number" data-target="12500">0</div>
-                            <div class="stat-label">Events launched</div>
-                        </div>
-                        <div class="creator-stat">
-                            <div class="stat-number" data-target="340000">0</div>
-                            <div class="stat-label">Tickets sold</div>
-                        </div>
-                        <div class="creator-stat">
-                            <div class="stat-number">4.9<span class="stat-small">/5</span></div>
-                            <div class="stat-label">Creator rating</div>
-                        </div>
+                    <div class="cl-pills">
+                        <span class="cl-pill">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h11A2.5 2.5 0 0 1 20 8.5V10a2 2 0 0 0 0 4v1.5A2.5 2.5 0 0 1 17.5 18h-11A2.5 2.5 0 0 1 4 15.5V14a2 2 0 1 0 0-4V8.5Z"/></svg>
+                            Ticket tiers
+                        </span>
+                        <span class="cl-pill">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+                            Live analytics
+                        </span>
+                        <span class="cl-pill">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M20 6L9 17L4 12"/></svg>
+                            QR check-in
+                        </span>
+                        <span class="cl-pill">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            Secure payments
+                        </span>
                     </div>
                 </div>
 
-                <div class="creator-hero-visual">
-                    <div class="visual-frame">
-                        <div class="frame-topbar">
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                <!-- Floating preview card -->
+                <div class="cl-preview-wrap">
+                    <div class="cl-preview-card">
+                        <div class="cl-preview-header">
+                            <div class="cl-preview-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <span class="cl-preview-badge">
+                                <span class="cl-live-dot"></span>
+                                Live preview
+                            </span>
                         </div>
 
-                        <div class="visual-poster">
-                            <div class="poster-badge">Selling fast</div>
-                            <div class="poster-copy">
-                                <p class="poster-label">Live event page</p>
-                                <h2>Moonlight Rooftop Series</h2>
-                                <p>An elevated music night with limited seats, premium access, and seamless QR check-in.</p>
+                        <div class="cl-preview-poster">
+                            <div class="cl-poster-bg"></div>
+                            <div class="cl-poster-overlay"></div>
+                            <span class="cl-poster-tag">Selling fast</span>
+                            <div class="cl-poster-copy">
+                                <span class="cl-poster-label">Live event page</span>
+                                <h3 class="cl-poster-title">Moonlight Rooftop Series</h3>
+                                <p class="cl-poster-sub">Limited seats · Premium access · QR check-in</p>
                             </div>
                         </div>
 
-                        <div class="visual-lower">
-                            <div class="visual-summary">
-                                <div class="summary-row">
-                                    <span>Revenue</span>
-                                    <strong>NGN 8.4M</strong>
-                                </div>
-                                <div class="summary-row">
-                                    <span>Tickets sold</span>
-                                    <strong>1,284</strong>
-                                </div>
-                                <div class="summary-row">
-                                    <span>Capacity</span>
-                                    <strong>92%</strong>
-                                </div>
+                        <div class="cl-preview-stats">
+                            <div class="cl-preview-stat">
+                                <span class="cl-preview-stat-val cl-green">₦8.4M</span>
+                                <span class="cl-preview-stat-key">Revenue</span>
                             </div>
+                            <div class="cl-preview-stat-divider"></div>
+                            <div class="cl-preview-stat">
+                                <span class="cl-preview-stat-val cl-teal">1,284</span>
+                                <span class="cl-preview-stat-key">Tickets</span>
+                            </div>
+                            <div class="cl-preview-stat-divider"></div>
+                            <div class="cl-preview-stat">
+                                <span class="cl-preview-stat-val">92%</span>
+                                <span class="cl-preview-stat-key">Capacity</span>
+                            </div>
+                        </div>
 
-                            <div class="visual-checklist">
-                                <p>Launch checklist</p>
-                                <div class="check-item complete">Branding locked in</div>
-                                <div class="check-item complete">Tickets configured</div>
-                                <div class="check-item">Campaign goes live at 6 PM</div>
+                        <div class="cl-preview-bar-section">
+                            <div class="cl-preview-bar-label">
+                                <span>Capacity fill</span>
+                                <span class="cl-green">92%</span>
                             </div>
+                            <div class="cl-preview-bar-track">
+                                <div class="cl-preview-bar-fill" id="cl-bar-fill"></div>
+                            </div>
+                        </div>
+
+                        <div class="cl-preview-checklist">
+                            <div class="cl-check-item cl-check-done">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17L4 12"/></svg>
+                                Branding locked in
+                            </div>
+                            <div class="cl-check-item cl-check-done">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17L4 12"/></svg>
+                                Tickets configured
+                            </div>
+                            <div class="cl-check-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                Campaign goes live at 6 PM
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══ HOW IT WORKS ══ -->
+            <section class="cl-how">
+                <div class="cl-shell cl-shell--full">
+                    <div class="cl-how-steps">
+                        <div class="cl-how-step cl-reveal">
+                            <div class="cl-how-num">01</div>
+                            <h3 class="cl-how-title">Build the page</h3>
+                            <p class="cl-how-body">Add your visuals, ticket tiers, schedule, and all the details attendees actually care about.</p>
+                        </div>
+                        <div class="cl-how-connector" aria-hidden="true">→</div>
+                        <div class="cl-how-step cl-reveal" style="transition-delay: 0.1s;">
+                            <div class="cl-how-num">02</div>
+                            <h3 class="cl-how-title">Open sales</h3>
+                            <p class="cl-how-body">Publish, share the link, and watch registrations come in. Live tracking at every step.</p>
+                        </div>
+                        <div class="cl-how-connector" aria-hidden="true">→</div>
+                        <div class="cl-how-step cl-reveal" style="transition-delay: 0.2s;">
+                            <div class="cl-how-num">03</div>
+                            <h3 class="cl-how-title">Run it smoothly</h3>
+                            <p class="cl-how-body">Single-scan QR check-in, live capacity, and a full picture of the night when it's done.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="creator-proof">
-                <div class="proof-intro">
-                    <span class="section-chip">Why creators choose Eventful</span>
-                    <h2>Everything feels cleaner when the tools do less fighting back.</h2>
-                    <p>Design-forward pages, practical controls, and a flow that helps you move from idea to launch without losing momentum.</p>
-                </div>
+            <!-- ══ CTA ══ -->
+            <section class="cl-cta">
+                <div class="cl-shell">
+                    <div class="cl-cta-panel cl-reveal">
+                        <div class="cl-cta-glow" aria-hidden="true"></div>
+                        <div class="cl-cta-bg-text" aria-hidden="true">Create</div>
 
-                <div class="proof-grid">
-                    <article class="feature-card card-1">
-                        <div class="feature-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                                <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <div class="cl-kicker">Ready when you are</div>
+                        <h2 class="cl-cta-title">
+                            Build something<br>
+                            <em>worth talking about.</em>
+                        </h2>
+                        <p class="cl-cta-sub">
+                            Free to start. Goes live in minutes.
+                            No spreadsheets, no stress.
+                        </p>
+                        <button class="cl-btn-primary cl-btn-primary--lg" id="cl-cta-btn">
+                            <span>Get started free</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
                             </svg>
-                        </div>
-                        <h3>Fast setup that still feels premium</h3>
-                        <p>Create an event page in minutes without ending up with something generic or rushed.</p>
-                    </article>
-
-                    <article class="feature-card card-2">
-                        <div class="feature-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                                <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
-                                <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
-                                <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
-                                <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
-                            </svg>
-                        </div>
-                        <h3>Live insights that stay easy to read</h3>
-                        <p>Watch registrations, turnout, and revenue evolve in real time with a calmer dashboard experience.</p>
-                    </article>
-
-                    <article class="feature-card card-3">
-                        <div class="feature-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
-                                <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <h3>Checkout that gets out of the way</h3>
-                        <p>Give attendees a fast purchase flow that feels trustworthy on both mobile and desktop.</p>
-                    </article>
-
-                    <article class="feature-card card-4">
-                        <div class="feature-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <h3>Better tools for event-day control</h3>
-                        <p>From promotion to verification, keep the experience organized before the doors even open.</p>
-                    </article>
-                </div>
-            </section>
-
-            <section class="creator-flow">
-                <div class="flow-panel">
-                    <div class="flow-heading">
-                        <span class="section-chip dark">Creator flow</span>
-                        <h2>A launch journey that feels polished from start to finish.</h2>
-                        <p>Instead of juggling scattered tools, shape the page, open sales, and run the day from one coordinated workflow.</p>
-                    </div>
-
-                    <div class="flow-track">
-                        <article class="flow-step">
-                            <div class="flow-step-top">
-                                <span class="flow-step-number">01</span>
-                                <span class="flow-step-tag">Design</span>
-                            </div>
-                            <h3>Shape the page</h3>
-                            <p>Tell the story of the event with visuals, ticket tiers, schedule, and the details buyers actually care about.</p>
-                        </article>
-
-                        <article class="flow-step">
-                            <div class="flow-step-top">
-                                <span class="flow-step-number">02</span>
-                                <span class="flow-step-tag">Launch</span>
-                            </div>
-                            <h3>Open registrations</h3>
-                            <p>Publish confidently, collect payments quickly, and keep a close eye on traction without friction.</p>
-                        </article>
-
-                        <article class="flow-step">
-                            <div class="flow-step-top">
-                                <span class="flow-step-number">03</span>
-                                <span class="flow-step-tag">Deliver</span>
-                            </div>
-                            <h3>Run the event smoothly</h3>
-                            <p>Check guests in faster, confirm tickets instantly, and keep operations feeling composed on the day.</p>
-                        </article>
+                        </button>
                     </div>
                 </div>
             </section>
 
-            <section class="creator-cta">
-                <div class="creator-cta-panel">
-                    <span class="section-chip light">Ready to launch</span>
-                    <h2>Create something worth talking about.</h2>
-                    <p>Bring your next event online with a page that looks polished, converts better, and stays manageable all the way through.</p>
-                    <button class="primary-action light" id="createEventBtnBottom">
-                        <span>Get started now</span>
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-                </div>
-            </section>
         </div>
     `;
 
-    document.getElementById("createEventBtn")?.addEventListener("click", () => {
-        navigate("/create/new");
-    });
+    // ── Button wiring ──
+    document.getElementById("cl-start-btn")?.addEventListener("click", () => navigate("/create/new"));
+    document.getElementById("cl-cta-btn")?.addEventListener("click", () => navigate("/create/new"));
+    document.getElementById("cl-explore-btn")?.addEventListener("click", () => navigate("/explore"));
 
-    document.getElementById("createEventBtnBottom")?.addEventListener("click", () => {
-        navigate("/create/new");
-    });
+    // ── Animate bar fill ──
+    setTimeout(() => {
+        const bar = document.getElementById("cl-bar-fill");
+        if (bar) bar.style.width = "92%";
+    }, 600);
 
-    document.getElementById("exploreBtn")?.addEventListener("click", () => {
-        navigate("/explore");
-    });
-
-    const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateStats();
-                statsObserver.disconnect();
+    // ── Scroll reveal ──
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add("cl-visible");
+                obs.unobserve(e.target);
             }
         });
-    }, { threshold: 0.4 });
+    }, { threshold: 0.12 });
 
-    const heroStats = document.querySelector(".creator-stats");
-    if (heroStats) {
-        statsObserver.observe(heroStats);
-    }
-
-    const cards = document.querySelectorAll(".feature-card");
-    const cardObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-            }
-        });
-    }, { threshold: 0.2 });
-
-    cards.forEach(card => cardObserver.observe(card));
-}
-
-function animateStats() {
-    const statNumbers = document.querySelectorAll(".stat-number[data-target]");
-
-    statNumbers.forEach(stat => {
-        const target = parseInt(stat.getAttribute("data-target") || "0");
-        const duration = 1800;
-        const start = performance.now();
-
-        const animate = (currentTime: number) => {
-            const elapsed = currentTime - start;
-            const progress = Math.min(elapsed / duration, 1);
-            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-            const current = Math.floor(easeOutQuart * target);
-
-            stat.textContent = current.toLocaleString();
-
-            if (progress < 1) {
-                requestAnimationFrame(animate);
-            } else {
-                stat.textContent = target.toLocaleString();
-            }
-        };
-
-        requestAnimationFrame(animate);
-    });
+    document.querySelectorAll(".cl-reveal").forEach(el => obs.observe(el));
 }
