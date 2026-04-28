@@ -279,7 +279,7 @@
 .hc-orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(160px);
+    filter: blur(100px);
     will-change: transform;
 }
 
@@ -698,9 +698,8 @@
     border: 1px solid var(--hc-border-2);
     background: var(--hc-surface);
     overflow: hidden;
-    box-shadow: 0 40px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(200,240,74,0.05);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(200,240,74,0.08);
     transition: transform 0.5s var(--hc-ease-out), box-shadow 0.5s ease;
-    animation: hc-card-glow 4s 2s ease-in-out infinite;
     transform-style: preserve-3d;
     will-change: transform;
 }
@@ -721,8 +720,6 @@
     position: absolute;
     inset: 0;
     background: linear-gradient(135deg, #080f22 0%, #12083a 45%, #060d1a 100%);
-    background-size: 300% 300%;
-    animation: hc-mesh-shift 8s ease-in-out infinite;
 }
 
 .hc-hero-card-overlay {
@@ -754,9 +751,8 @@
     height: 28px;
     padding: 0 12px;
     border-radius: 999px;
-    background: rgba(12,16,24,0.8);
+    background: rgba(12,16,24,0.94);
     border: 1px solid rgba(200,240,74,0.3);
-    backdrop-filter: blur(10px);
     color: var(--hc-accent);
     font-size: 0.68rem;
     font-weight: 700;
@@ -859,8 +855,7 @@
     padding: 10px 16px;
     border-radius: 16px;
     border: 1px solid var(--hc-border-2);
-    background: rgba(12,16,24,0.88);
-    backdrop-filter: blur(16px);
+    background: rgba(12,16,24,0.96);
     box-shadow: 0 16px 40px rgba(0,0,0,0.4);
     z-index: 10;
     white-space: nowrap;
@@ -1201,9 +1196,8 @@
     height: 24px;
     padding: 0 10px;
     border-radius: 999px;
-    background: rgba(6,8,15,0.75);
+    background: rgba(6,8,15,0.90);
     border: 1px solid rgba(255,255,255,0.1);
-    backdrop-filter: blur(8px);
     color: rgba(255,255,255,0.8);
     font-size: 0.63rem;
     font-weight: 700;
@@ -1350,6 +1344,8 @@
     position: relative;
     z-index: 3;
     padding: 0 0 120px;
+    content-visibility: auto;
+    contain-intrinsic-size: 0 600px;
 }
 
 .hc-features-grid {
@@ -1452,6 +1448,8 @@
     position: relative;
     z-index: 3;
     padding: 0 0 120px;
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px;
 }
 
 .hc-how-steps {
@@ -1543,6 +1541,8 @@
     position: relative;
     z-index: 3;
     padding: 0 0 120px;
+    content-visibility: auto;
+    contain-intrinsic-size: 0 700px;
 }
 
 .hc-creator-layout {
@@ -1615,16 +1615,7 @@
     gap: 12px;
     font-size: 0.87rem;
     color: var(--hc-text-2);
-    opacity: 0;
-    animation: hc-fade-right 0.6s var(--hc-ease-out) forwards;
 }
-
-.hc-creator-list li:nth-child(1) { animation-delay: 0.1s; }
-.hc-creator-list li:nth-child(2) { animation-delay: 0.2s; }
-.hc-creator-list li:nth-child(3) { animation-delay: 0.3s; }
-.hc-creator-list li:nth-child(4) { animation-delay: 0.4s; }
-
-.hc-creator-list .hc-visible li { opacity: 1; }
 
 .hc-creator-dot {
     width: 6px; height: 6px;
@@ -1817,13 +1808,7 @@
     gap: 8px;
     padding: 7px 0;
     border-bottom: 1px solid rgba(255,255,255,0.03);
-    opacity: 0;
-    animation: hc-feed-slide 0.5s var(--hc-ease-out) forwards;
 }
-
-.hc-dash-feed-item:nth-child(2) { animation-delay: 1.2s; }
-.hc-dash-feed-item:nth-child(3) { animation-delay: 1.6s; }
-.hc-dash-feed-item:nth-child(4) { animation-delay: 2s; }
 
 .hc-dash-feed-dot {
     width: 6px; height: 6px;
@@ -1850,6 +1835,8 @@
     position: relative;
     z-index: 3;
     padding: 0 0 120px;
+    content-visibility: auto;
+    contain-intrinsic-size: 0 450px;
 }
 
 .hc-proof-marquee-wrap {
@@ -1914,14 +1901,7 @@
 .hc-star {
     color: var(--hc-warm);
     font-size: 0.85rem;
-    animation: hc-pop 0.4s var(--hc-ease-out) both;
 }
-
-.hc-star:nth-child(1) { animation-delay: 0.05s; }
-.hc-star:nth-child(2) { animation-delay: 0.1s; }
-.hc-star:nth-child(3) { animation-delay: 0.15s; }
-.hc-star:nth-child(4) { animation-delay: 0.2s; }
-.hc-star:nth-child(5) { animation-delay: 0.25s; }
 
 .hc-tcard-body {
     font-size: 0.9rem;
@@ -1968,6 +1948,8 @@
     position: relative;
     z-index: 3;
     padding: 0 0 120px;
+    content-visibility: auto;
+    contain-intrinsic-size: 0 600px;
 }
 
 .hc-cta-panel {
@@ -2024,7 +2006,6 @@
     background: radial-gradient(ellipse, rgba(200,240,74,0.08), transparent 70%);
     filter: blur(40px);
     pointer-events: none;
-    animation: hc-mesh-shift 8s ease-in-out infinite;
 }
 
 .hc-cta-title {

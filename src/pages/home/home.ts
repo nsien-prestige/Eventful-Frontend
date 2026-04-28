@@ -22,28 +22,30 @@ function initParticleCanvas() {
 
     let W = (canvas.width = window.innerWidth);
     let H = (canvas.height = window.innerHeight);
+    let rafId: number;
 
     window.addEventListener("resize", () => {
         W = canvas.width = window.innerWidth;
         H = canvas.height = window.innerHeight;
-    });
+    }, { passive: true });
 
-    const PARTICLE_COUNT = 60;
+    const PARTICLE_COUNT = 35;
+    const CONN_DIST = 110;
     const particles: { x: number; y: number; vx: number; vy: number; r: number; alpha: number }[] = [];
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
         particles.push({
             x: Math.random() * W,
             y: Math.random() * H,
-            vx: (Math.random() - 0.5) * 0.35,
-            vy: (Math.random() - 0.5) * 0.35,
-            r: 0.8 + Math.random() * 1.4,
-            alpha: 0.15 + Math.random() * 0.45,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: (Math.random() - 0.5) * 0.3,
+            r: 0.8 + Math.random() * 1.2,
+            alpha: 0.12 + Math.random() * 0.35,
         });
     }
 
     let mouseX = -9999, mouseY = -9999;
-    document.addEventListener("mousemove", (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+    document.addEventListener("mousemove", (e) => { mouseX = e.clientX; mouseY = e.clientY; }, { passive: true });
 
     const draw = () => {
         ctx.clearRect(0, 0, W, H);
@@ -56,29 +58,32 @@ function initParticleCanvas() {
             if (p.y < 0) p.y = H;
             if (p.y > H) p.y = 0;
 
-            // Mouse repel
+            // Mouse repel — skip sqrt when outside bounding box
             const dx = p.x - mouseX;
             const dy = p.y - mouseY;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 120) {
-                const force = (120 - dist) / 120 * 0.6;
-                p.x += (dx / dist) * force;
-                p.y += (dy / dist) * force;
+            if (Math.abs(dx) < 120 && Math.abs(dy) < 120) {
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 120 && dist > 0) {
+                    const force = (120 - dist) / 120 * 0.5;
+                    p.x += (dx / dist) * force;
+                    p.y += (dy / dist) * force;
+                }
             }
         }
 
-        // Draw connections
+        // Draw connections — bounding box pre-check avoids most sqrt calls
+        ctx.lineWidth = 0.5;
         for (let i = 0; i < particles.length; i++) {
             for (let j = i + 1; j < particles.length; j++) {
                 const dx = particles[i].x - particles[j].x;
                 const dy = particles[i].y - particles[j].y;
+                if (Math.abs(dx) > CONN_DIST || Math.abs(dy) > CONN_DIST) continue;
                 const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 130) {
+                if (dist < CONN_DIST) {
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(200, 240, 74, ${(1 - dist / 130) * 0.12})`;
-                    ctx.lineWidth = 0.6;
+                    ctx.strokeStyle = `rgba(200, 240, 74, ${(1 - dist / CONN_DIST) * 0.1})`;
                     ctx.stroke();
                 }
             }
@@ -92,9 +97,18 @@ function initParticleCanvas() {
             ctx.fill();
         }
 
-        requestAnimationFrame(draw);
+        rafId = requestAnimationFrame(draw);
     };
-    draw();
+    rafId = requestAnimationFrame(draw);
+
+    // Pause when tab is not visible to save CPU
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+            cancelAnimationFrame(rafId);
+        } else {
+            rafId = requestAnimationFrame(draw);
+        }
+    });
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -216,15 +230,32 @@ function initProgressBars() {
 // ─────────────────────────────────────────────────────────────
 function initTiltCards() {
     document.querySelectorAll<HTMLElement>("[data-tilt]").forEach((card) => {
+        let rafPending = false;
+        let pendingX = 0, pendingY = 0;
+
+        card.addEventListener("mouseenter", () => {
+            card.style.willChange = "transform";
+        }, { passive: true });
+
         card.addEventListener("mousemove", (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = (e.clientX - rect.left) / rect.width - 0.5;
-            const y = (e.clientY - rect.top) / rect.height - 0.5;
-            card.style.transform = `perspective(800px) rotateX(${-y * 10}deg) rotateY(${x * 10}deg) translateZ(8px)`;
-        });
+            pendingX = e.clientX;
+            pendingY = e.clientY;
+            if (!rafPending) {
+                rafPending = true;
+                requestAnimationFrame(() => {
+                    const rect = card.getBoundingClientRect();
+                    const x = (pendingX - rect.left) / rect.width - 0.5;
+                    const y = (pendingY - rect.top) / rect.height - 0.5;
+                    card.style.transform = `perspective(800px) rotateX(${-y * 10}deg) rotateY(${x * 10}deg) translateZ(8px)`;
+                    rafPending = false;
+                });
+            }
+        }, { passive: true });
+
         card.addEventListener("mouseleave", () => {
             card.style.transform = "";
-        });
+            card.style.willChange = "auto";
+        }, { passive: true });
     });
 }
 
