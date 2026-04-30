@@ -11,8 +11,19 @@ export function renderNavbar(root: HTMLElement) {
     const isHome = path === "/";
     const isDashboard = path === "/dashboard";
     const isExplore = path === "/explore";
+    const isCreateLanding = path === "/create";
+    const isEventDetail = path.startsWith("/event/");
+    const isMyEvents = path === "/my-events";
 
-    nav.className = `app-navbar ${isHome ? "home-navbar" : "standard-navbar"} ${isDashboard ? "dashboard-navbar" : ""} ${isExplore ? "explore-navbar" : ""}`.trim();
+    let navbarVariant = "standard-navbar";
+    if (isHome) navbarVariant = "home-navbar";
+    else if (isDashboard) navbarVariant = "dashboard-navbar";
+    else if (isExplore) navbarVariant = "explore-navbar";
+    else if (isCreateLanding) navbarVariant = "create-navbar";
+    else if (isEventDetail) navbarVariant = "event-navbar";
+    else if (isMyEvents) navbarVariant = "my-events-navbar";
+
+    nav.className = `app-navbar ${navbarVariant}`;
     nav.innerHTML = isHome ? renderHomeNavbar() : renderStandardNavbar(path);
 
     root.appendChild(nav);
